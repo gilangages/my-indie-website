@@ -11,11 +11,13 @@
 
     <!-- DESC -->
     <div class="ml-[-11em] max-sm:ml-0">
-      <h1 class="text-4xl max-sm:text-3xl font-bold mb-4 text-center max-sm:mt-4 mt-8">About Me</h1>
+      <h1 class="text-4xl max-sm:text-3xl font-bold mb-4 text-center max-sm:mt-4 mt-8 max-sm:ml-0 ml-[-2em]">
+        About Me
+      </h1>
 
       <p class="text-lg max-sm:text-base leading-relaxed text-center text-[#573440]">
-        My name is Abdian. I’m currently studying in university. If I have free time I use it to draw and make
-        animation.
+        My name is Abdian. I’m currently studying at university and enjoy spending my free time exploring creative
+        projects and relaxing.
       </p>
     </div>
   </div>

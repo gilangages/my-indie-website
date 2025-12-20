@@ -6,6 +6,7 @@ import HomeLayout from "./components/HomeLayout.vue";
 import About from "./components/Pages/About.vue";
 import FindMe from "./components/Pages/FindMe.vue";
 import Interests from "./components/Pages/Interests.vue";
+import ArtModal from "./components/Modal/ArtModal.vue";
 
 const router = createRouter({
   routes: [
@@ -26,6 +27,10 @@ const router = createRouter({
           component: Interests,
         },
       ],
+    },
+    {
+      path: "/see-art",
+      component: ArtModal,
     },
   ],
   history: createWebHistory(),
