@@ -15,9 +15,4 @@ import Navbar from "./Sections/Navbar.vue";
   <Footer />
 </template>
 
-<style>
-body {
-  font-family: Capriola, sans-serif;
-  background-color: #000;
-}
-</style>
+<style></style>

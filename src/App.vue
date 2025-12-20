@@ -3,9 +3,10 @@
   <RouterView />
 </template>
 
-<style scoped>
+<style>
 /* global font */
 body {
   font-family: Capriola, sans-serif;
+  background-color: #000;
 }
 </style>

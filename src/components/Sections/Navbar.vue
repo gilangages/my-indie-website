@@ -33,9 +33,4 @@
   </div>
 </template>
 
-<style>
-body {
-  font-family: Capriola, sans-serif;
-  background-color: #000;
-}
-</style>
+<style></style>

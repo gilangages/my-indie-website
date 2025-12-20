@@ -66,7 +66,7 @@ onUnmounted(() => {
             :class="
               isMobile
                 ? 'fixed bottom-0 left-0 right-0 max-h-[90vh] min-h-[60vh] rounded-t-[20px] bg-[#573440] text-black overflow-hidden flex flex-col'
-                : 'absolute inset-0 m-auto w-[90%] max-w-[800px] max-h-[85vh] rounded-[20px] bg-[#573440] text-black overflow-hidden flex flex-col'
+                : 'absolute inset-0 m-auto w-[90%] max-w-200 max-h-[85vh] rounded-[20px] bg-[#573440] text-black overflow-hidden flex flex-col'
             ">
             <div class="sticky top-0 z-10 flex justify-end p-3 bg-[#573440] border-b border-black/20">
               <button class="text-2xl transition-transform duration-200 hover:scale-110" @click="emit('close')">
@@ -152,7 +152,7 @@ onUnmounted(() => {
             :src="selectedImage.src"
             class="max-w-full max-h-[80vh] object-contain shadow-2xl transition-transform duration-300 scale-100 cursor-zoom-out"
             @click="selectedImage = null" />
-          <p class="mt-4 text-[#e8b4b8] text-center text-lg font-['Capriola'] max-w-[600px]">
+          <p class="mt-4 text-[#e8b4b8] text-center text-lg max-w-150">
             {{ selectedImage.caption }}
           </p>
         </div>
