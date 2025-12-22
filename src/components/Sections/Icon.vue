@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <div class="flex ml-12 mt-8 mb-8 gap-4">
+  <div class="flex ml-12 mt-8 gap-4">
     <span class="icon">
       <img
         src="../../assets/theme-night.svg"

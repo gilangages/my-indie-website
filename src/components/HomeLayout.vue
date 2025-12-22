@@ -10,9 +10,9 @@ import Navbar from "./Sections/Navbar.vue";
     <div class="w-full max-w-175 sm:border-4 sm:border-[#573440] sm:rounded-[30px] px-3">
       <Navbar />
       <RouterView />
-      <Footer />
     </div>
   </div>
+  <Footer />
 </template>
 
 <style>

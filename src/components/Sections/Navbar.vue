@@ -4,27 +4,32 @@
 
 <template>
   <!-- BANNER -->
-  <div class="text-center mt-4">
+  <div class="text-center ml-4">
     <img src="../../assets/bannerblack.png" alt="" class="mx-auto w-[30%] max-sm:w-[70%]" />
   </div>
 
   <!-- NAVBARS -->
   <div class="grid grid-cols-3 gap-4 mt-[-1.5em] justify-center items-center pt-4 max-sm:grid-cols-3">
     <!-- Item Navbar -->
-    <div
-      class="text-center text-[24px] max-sm:text-[12px] border-[1.5px] border-[#573440] rounded-xl text-[#a95964] px-8 py-1 max-sm:px-2 max-sm:py-2 transition-transform duration-200 hover:scale-105 hover:bg-[#121212] cursor-pointer">
-      <router-link to="/">About</router-link>
-    </div>
+    <router-link to="/">
+      <div
+        class="text-center text-[24px] max-sm:text-[12px] border-[1.5px] border-[#573440] rounded-xl text-[#a95964] px-8 py-1 max-sm:px-2 max-sm:py-2 transition-transform duration-200 hover:scale-105 hover:bg-[#121212] cursor-pointer">
+        About
+      </div>
+    </router-link>
+    <router-link to="/interests">
+      <div
+        class="text-center text-[24px] max-sm:text-[12px] border-[1.5px] border-[#573440] rounded-xl text-[#a95964] px-8 py-1 max-sm:px-2 max-sm:py-2 transition-transform duration-200 hover:scale-105 hover:bg-[#121212] cursor-pointer">
+        Interests
+      </div>
+    </router-link>
 
-    <div
-      class="text-center text-[24px] max-sm:text-[12px] border-[1.5px] border-[#573440] rounded-xl text-[#a95964] px-8 py-1 max-sm:px-2 max-sm:py-2 transition-transform duration-200 hover:scale-105 hover:bg-[#121212] cursor-pointer">
-      <router-link to="/interests">Interest</router-link>
-    </div>
-
-    <div
-      class="text-center text-[24px] max-sm:text-[12px] border-[1.5px] border-[#573440] rounded-xl text-[#a95964] px-8 py-1 max-sm:px-2 max-sm:py-2 transition-transform duration-200 hover:scale-105 hover:bg-[#121212] cursor-pointer">
-      <router-link to="/find-me">Find Me</router-link>
-    </div>
+    <router-link to="/find-me">
+      <div
+        class="text-center text-[24px] max-sm:text-[12px] border-[1.5px] border-[#573440] rounded-xl text-[#a95964] px-8 py-1 max-sm:px-2 max-sm:py-2 transition-transform duration-200 hover:scale-105 hover:bg-[#121212] cursor-pointer">
+        Find Me
+      </div>
+    </router-link>
   </div>
 </template>
 
