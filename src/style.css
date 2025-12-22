@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Capriola&display=swap");
 @import "tailwindcss";
-@theme {
+
+:root {
   --font-display: "Capriola", sans-serif;
   --text-big: 2em;
   --color-black: #000000;
