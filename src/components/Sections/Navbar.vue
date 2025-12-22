@@ -12,17 +12,17 @@
   <div class="grid grid-cols-3 gap-4 mt-[-1.5em] justify-center items-center pt-4 max-sm:grid-cols-3">
     <!-- Item Navbar -->
     <div
-      class="text-center text-[24px] max-sm:text-[12px] border-[1.5px] border-[#573440] rounded-[12px] text-[#a95964] px-8 py-1 max-sm:px-2 max-sm:py-2 transition-transform duration-200 hover:scale-105 hover:bg-[#121212] cursor-pointer">
+      class="text-center text-[24px] max-sm:text-[12px] border-[1.5px] border-[#573440] rounded-xl text-[#a95964] px-8 py-1 max-sm:px-2 max-sm:py-2 transition-transform duration-200 hover:scale-105 hover:bg-[#121212] cursor-pointer">
       <router-link to="/">About</router-link>
     </div>
 
     <div
-      class="text-center text-[24px] max-sm:text-[12px] border-[1.5px] border-[#573440] rounded-[12px] text-[#a95964] px-8 py-1 max-sm:px-2 max-sm:py-2 transition-transform duration-200 hover:scale-105 hover:bg-[#121212] cursor-pointer">
+      class="text-center text-[24px] max-sm:text-[12px] border-[1.5px] border-[#573440] rounded-xl text-[#a95964] px-8 py-1 max-sm:px-2 max-sm:py-2 transition-transform duration-200 hover:scale-105 hover:bg-[#121212] cursor-pointer">
       <router-link to="/interests">Interest</router-link>
     </div>
 
     <div
-      class="text-center text-[24px] max-sm:text-[12px] border-[1.5px] border-[#573440] rounded-[12px] text-[#a95964] px-8 py-1 max-sm:px-2 max-sm:py-2 transition-transform duration-200 hover:scale-105 hover:bg-[#121212] cursor-pointer">
+      class="text-center text-[24px] max-sm:text-[12px] border-[1.5px] border-[#573440] rounded-xl text-[#a95964] px-8 py-1 max-sm:px-2 max-sm:py-2 transition-transform duration-200 hover:scale-105 hover:bg-[#121212] cursor-pointer">
       <router-link to="/find-me">Find Me</router-link>
     </div>
   </div>
