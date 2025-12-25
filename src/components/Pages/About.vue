@@ -6,7 +6,7 @@
   <div class="grid grid-cols-2 max-sm:grid-cols-1 justify-center text-[#993f4b]">
     <!-- ME -->
     <div class="max-sm:text-center text-center">
-      <img src="../../assets/me-black-crop.png" alt="" class="w-[40%] ml-8 max-sm:mx-auto" />
+      <img src="../../assets/others/me-black-crop-removebg.png" alt="" class="w-[40%] ml-8 max-sm:mx-auto" />
     </div>
 
     <!-- DESC -->
@@ -17,7 +17,7 @@
 
       <p class="text-lg max-sm:text-base leading-relaxed text-center text-[#573440]">
         My name is Abdian. I’m currently studying at university and enjoy spending my free time exploring creative
-        projects and relaxing.
+        projects, while still taking time to relax (..◜ᴗ◝..).
       </p>
     </div>
   </div>

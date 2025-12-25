@@ -114,7 +114,7 @@ onUnmounted(() => {
               <hr class="my-8 h-[3px] border-none bg-[#432832]" />
 
               <div id="projects" class="flex flex-col">
-                <h1 class="text-2xl font-bold uppercase mb-6">My Projects</h1>
+                <h1 class="text-2xl font-bold uppercase">My Projects</h1>
 
                 <div v-for="(project, index) in projects" :key="index">
                   <div class="flex flex-col gap-4 items-center sm:flex-row sm:items-start sm:gap-6 py-6">
@@ -147,7 +147,17 @@ onUnmounted(() => {
                   <hr v-if="index < projects.length - 1" class="my-2 h-[3px] border-none bg-[#432832]" />
                 </div>
               </div>
-              <hr class="h-[3px] border-none bg-[#432832]" />
+              <hr class="my-8 h-[3px] border-none bg-[#432832]" />
+              <div id="other" class="flex flex-col">
+                <h2 class="text-xl font-bold mb-4">Other dev projects:</h2>
+                <ul class="list-disc list-outside pl-5">
+                  <li>this website!</li>
+                  <li>
+                    that’s all for now, there are some projects i’m working on behind the scenes, and i’m excited to
+                    share them soon (˶ᵔ ᵕ ᵔ˶).
+                  </li>
+                </ul>
+              </div>
 
               <div class="mt-8 sm:text-left">
                 <p>

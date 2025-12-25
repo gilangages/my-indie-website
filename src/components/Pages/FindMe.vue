@@ -1,43 +1,53 @@
 <script setup>
-// belum ada logic JS
+// 1. IMPORT ASSETS GAMBAR (Wajib import biar kebaca Vite)
+// Pastikan path-nya sesuai struktur foldermu
+import iconYt from "../../assets/svg/yt.svg?url";
+import iconIg from "../../assets/svg/instagram.svg?url";
+import iconTiktok from "../../assets/svg/tiktok.svg?url";
+
+// 2. DATA SOCIAL MEDIA
+const socials = [
+  {
+    id: 1,
+    name: "YouTube",
+    icon: iconYt, // pakai variable import di atas
+    link: "https://www.youtube.com/@abdiannn", // Ganti link asli
+    desc: "I’m mostly active on YouTube, where I draw digitally, build websites, and do whatever I enjoy.",
+  },
+  {
+    id: 2,
+    name: "Instagram",
+    icon: iconIg,
+    link: "https://www.instagram.com/abdian.sketch",
+    desc: "I share my traditional art here. If you’re curious about my drawings, feel free to check them out.",
+  },
+  {
+    id: 3,
+    name: "TikTok",
+    icon: iconTiktok,
+    link: "https://www.tiktok.com/@abdian.sketch",
+    desc: "I’m not very active on TikTok, but I still use it to share my traditional art.",
+  },
+];
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-2 text-[#993f4b]">
-    <!-- YOUTUBE -->
+  <div class="grid grid-cols-1 gap-4 text-[#993f4b] mx-2 mt-4 mb-8">
     <div
-      class="border border-[#a95964] rounded-[10px] px-2 pt-2 mx-2 mt-4 transition-transform duration-200 hover:scale-101">
-      <!-- header -->
+      v-for="social in socials"
+      :key="social.id"
+      class="border border-[#a95964] rounded-[10px] px-2 pt-2 transition-transform duration-200 hover:scale-101">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2 text-base max-sm:text-sm">
-          <img src="../../assets/yt.svg" alt="YouTube" class="w-8 max-sm:w-6" />
-          <span>YouTube</span>
+          <img :src="social.icon" :alt="social.name" class="w-8 max-sm:w-6" />
+          <span>{{ social.name }}</span>
         </div>
 
-        <a href="#" class="text-[12px] text-[#993f4b] no-underline">
-          <div
-            class="px-6 py-1 border border-[#a95964] rounded transition-transform duration-200 hover:scale-105 hover:bg-[#1d1d1d]">
-            View
-          </div>
-        </a>
-      </div>
-
-      <!-- description -->
-      <p class="my-2 text-[12px] text-[#573440]">
-        I’m mostly active on YouTube, where I draw digitally, build websites, and do whatever I enjoy.
-      </p>
-    </div>
-
-    <!-- INSTAGRAM -->
-    <div
-      class="border border-[#a95964] rounded-[10px] px-2 pt-2 mx-2 mt-2 transition-transform duration-200 hover:scale-101">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2 text-base max-sm:text-sm">
-          <img src="../../assets/instagram.svg" alt="Instagram" class="w-8 max-sm:w-6" />
-          <span>Instagram</span>
-        </div>
-
-        <a href="#" class="text-[12px] text-[#993f4b] no-underline">
+        <a
+          :href="social.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[12px] text-[#993f4b] no-underline">
           <div
             class="px-6 py-1 border border-[#a95964] rounded transition-transform duration-200 hover:scale-105 hover:bg-[#1d1d1d]">
             View
@@ -46,34 +56,12 @@
       </div>
 
       <p class="my-2 text-[12px] text-[#573440]">
-        I share my traditional art here. If you’re curious about my drawings, feel free to check them out.
-      </p>
-    </div>
-
-    <!-- TIKTOK -->
-    <div
-      class="border border-[#a95964] rounded-[10px] px-2 pt-2 mx-2 mt-2 mb-8 transition-transform duration-200 hover:scale-101">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2 text-base max-sm:text-sm">
-          <img src="../../assets/tiktok.svg" alt="TikTok" class="w-8 max-sm:w-6" />
-          <span>TikTok</span>
-        </div>
-
-        <a href="#" class="text-[12px] text-[#993f4b] no-underline">
-          <div
-            class="px-6 py-1 border border-[#a95964] rounded transition-transform duration-200 hover:scale-105 hover:bg-[#1d1d1d]">
-            View
-          </div>
-        </a>
-      </div>
-
-      <p class="my-2 text-[12px] text-[#573440]">
-        I’m not very active on TikTok, but I still use it to share my traditional art.
+        {{ social.desc }}
       </p>
     </div>
   </div>
 </template>
 
 <style scoped>
-/* semua styling via Tailwind */
+/* Styling via Tailwind */
 </style>
