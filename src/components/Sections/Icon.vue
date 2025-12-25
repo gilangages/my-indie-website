@@ -11,7 +11,7 @@
 
     <span class="icon">
       <img
-        src="../../assets/svg/music-on.svg"
+        src="../../assets/svg/music-off.svg"
         alt=""
         class="w-10 transition-transform duration-200 hover:scale-115 cursor-pointer" />
     </span>
