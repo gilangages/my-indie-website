@@ -52,7 +52,7 @@ onUnmounted(() => {
                    - rounded-t-[20px]: Sudut atas melengkung.
                 */
                 ? 'fixed bottom-0 left-0 right-0 h-[85vh] rounded-t-[20px] bg-[#573440] text-black overflow-hidden flex flex-col' /* DESKTOP STYLE */
-                : 'relative w-auto min-w-[700px] max-w-[1000px] h-fit max-h-[95vh] rounded-[20px] bg-[#573440] text-black overflow-hidden flex flex-col shadow-2xl'
+                : 'relative w-auto min-w-[400px] max-w-[1000px] h-fit max-h-[95vh] rounded-[20px] bg-[#573440] text-black overflow-hidden flex flex-col shadow-2xl'
             ">
             <div class="flex justify-end p-3 sm:p-4 z-20 relative">
               <button

@@ -76,7 +76,7 @@ onUnmounted(() => {
             :class="
               isMobile
                 ? 'fixed bottom-0 left-0 right-0 max-h-[90vh] min-h-[60vh] rounded-t-[20px] bg-[#573440] text-black overflow-hidden flex flex-col'
-                : 'absolute inset-0 m-auto w-[90%] max-w-[800px] max-h-[85vh] rounded-[20px] bg-[#573440] text-black overflow-hidden flex flex-col'
+                : 'absolute inset-0 m-auto w-[90%] max-w-[960px] max-h-[85vh] rounded-[20px] bg-[#573440] text-black overflow-hidden flex flex-col'
             ">
             <div class="sticky top-0 z-10 flex justify-end p-3 bg-[#573440] border-b border-black/20">
               <button class="text-2xl transition-transform duration-200 hover:scale-110" @click="emit('close')">

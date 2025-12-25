@@ -1,8 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 
-// --- 1. IMPORT GAMBAR (Best Practice di Vite) ---
-// Supaya path-nya tidak error/hilang saat build
+// --- 1. IMPORT GAMBAR ---
 import imgJayjo from "../../assets/traditional-art/jayjo.jpeg";
 import imgTotoro from "../../assets/digital-art/totoro.png";
 import imgRead from "../../assets/digital-art/read.png";
@@ -16,8 +15,7 @@ const emit = defineEmits(["close"]);
 const isMobile = ref(false);
 const selectedImage = ref(null);
 
-// --- 2. DATA ARTWORKS (Caption & Source diatur di sini) ---
-// Kamu tinggal edit/tambah list di sini saja
+// --- 2. DATA ARTWORKS ---
 const traditionalArtworks = [
   { id: 1, src: imgJayjo, caption: "Sketch karakter Jayjo dari Webtoon Windbreaker" },
   { id: 2, src: imgJayjo, caption: "Latihan shading menggunakan pensil 2B" },
@@ -31,6 +29,13 @@ const digitalArtworks = [
   { id: 1, src: imgTotoro, caption: "Fanart Totoro yang gemoy (Ghibli Studio)" },
   { id: 2, src: imgRead, caption: "Original Character: Gadis yang suka membaca" },
   { id: 3, src: imgRead, caption: "Eksperimen pewarnaan style watercolor" },
+];
+
+// --- DATA ANIMATION (BARU) ---
+const animationVideos = [
+  { id: 1, src: "https://www.youtube.com/embed/ivdqOTAxlJo?controls=0&rel=0" },
+  { id: 2, src: "https://www.youtube.com/embed/0ATh_Vc2SAQ?start=31&controls=0&rel=0" },
+  { id: 3, src: "https://www.youtube.com/embed/0ATh_Vc2SAQ?start=31&controls=0&rel=0" },
 ];
 
 // --- 3. LOGIKA POPUP ---
@@ -66,7 +71,7 @@ onUnmounted(() => {
             :class="
               isMobile
                 ? 'fixed bottom-0 left-0 right-0 max-h-[90vh] min-h-[60vh] rounded-t-[20px] bg-[#573440] text-black overflow-hidden flex flex-col'
-                : 'absolute inset-0 m-auto w-[90%] max-w-200 max-h-[85vh] rounded-[20px] bg-[#573440] text-black overflow-hidden flex flex-col'
+                : 'absolute inset-0 m-auto w-[90%] max-w-[960px] max-h-[85vh] rounded-[20px] bg-[#573440] text-black overflow-hidden flex flex-col'
             ">
             <div class="sticky top-0 z-10 flex justify-end p-3 bg-[#573440] border-b border-black/20">
               <button class="text-2xl transition-transform duration-200 hover:scale-110" @click="emit('close')">
@@ -88,7 +93,7 @@ onUnmounted(() => {
               <h1 class="uppercase text-3xl">Traditional Art</h1>
               <p class="my-2">some of my traditional art</p>
 
-              <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+              <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 max-sm:mb-4">
                 <img
                   v-for="art in traditionalArtworks"
                   :key="art.id"
@@ -102,7 +107,7 @@ onUnmounted(() => {
                   See More on
                   <a
                     target="_blank"
-                    href="https://github.com/gilangages"
+                    href="https://instagram.com/yourusername"
                     class="text-[#8f4a63] hover:text-[#794055] font-bold underline">
                     Instagram
                   </a>
@@ -114,7 +119,7 @@ onUnmounted(() => {
               <h1 class="uppercase text-3xl">Digital Art</h1>
               <p class="my-2">some of my digital art</p>
 
-              <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+              <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 max-sm:mb-4">
                 <img
                   v-for="art in digitalArtworks"
                   :key="art.id"
@@ -128,8 +133,35 @@ onUnmounted(() => {
                   See More on
                   <a
                     target="_blank"
-                    href="https://github.com/gilangages"
+                    href="https://youtube.com/@yourchannel"
                     class="text-[#8f4a63] hover:text-[#794055] font-bold underline">
+                    Youtube
+                  </a>
+                </p>
+              </div>
+
+              <hr class="my-8 h-[3px] border-none bg-[#432832]" />
+
+              <h1 class="uppercase text-3xl">Animation</h1>
+              <p class="my-2">some of my digital animations</p>
+
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div
+                  v-for="video in animationVideos"
+                  :key="video.id"
+                  class="w-full aspect-video rounded-md overflow-hidden bg-black shadow-md border border-[#432832]">
+                  <iframe
+                    :src="video.src"
+                    class="w-full h-full border-none"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                </div>
+              </div>
+
+              <div class="mt-2 max-sm:my-4 sm:text-left">
+                <p>
+                  See More on
+                  <a target="_blank" href="#" class="text-[#8f4a63] hover:text-[#794055] font-bold underline">
                     Youtube
                   </a>
                 </p>
@@ -162,7 +194,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* CSS Sama persis */
+/* STYLE SAMA (Tidak perlu ada tambahan CSS manual untuk grid video karena sudah pakai Tailwind) */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s ease;
