@@ -1,17 +1,26 @@
 <script setup>
-// 1. IMPORT ASSETS GAMBAR (Wajib import biar kebaca Vite)
-// Pastikan path-nya sesuai struktur foldermu
+// 1. IMPORT ASSETS GAMBAR
 import iconYt from "../../assets/svg/yt.svg?url";
 import iconIg from "../../assets/svg/instagram.svg?url";
 import iconTiktok from "../../assets/svg/tiktok.svg?url";
+import clickSfxFile from "../../assets/audio/click-main.mp3"; // <-- (1) Import Audio
 
-// 2. DATA SOCIAL MEDIA
+// 2. SETUP AUDIO
+const clickAudio = new Audio(clickSfxFile);
+clickAudio.volume = 0.1; // <-- (2) Volume 0.1
+
+const playClickSound = () => {
+  clickAudio.currentTime = 0;
+  clickAudio.play().catch((e) => console.error(e));
+};
+
+// 3. DATA SOCIAL MEDIA
 const socials = [
   {
     id: 1,
     name: "YouTube",
-    icon: iconYt, // pakai variable import di atas
-    link: "https://www.youtube.com/@abdiannn", // Ganti link asli
+    icon: iconYt,
+    link: "https://www.youtube.com/@abdiannn",
     desc: "I’m mostly active on YouTube, where I draw digitally, build websites, and do whatever I enjoy.",
   },
   {
@@ -47,9 +56,10 @@ const socials = [
           :href="social.link"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-[12px] text-[#993f4b] no-underline">
+          class="text-[12px] text-[#993f4b] no-underline"
+          @click="playClickSound">
           <div
-            class="px-6 py-1 border border-[#a95964] rounded transition-transform duration-200 hover:scale-105 hover:bg-[#1d1d1d]">
+            class="px-6 py-1 border border-[#a95964] rounded transition-transform duration-200 hover:scale-105 hover:bg-bg-hover">
             View
           </div>
         </a>

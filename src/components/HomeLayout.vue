@@ -7,7 +7,7 @@ import Navbar from "./Sections/Navbar.vue";
   <Icon />
 
   <div class="w-full flex justify-center">
-    <div class="w-full max-w-175 sm:border-4 sm:border-[#573440] sm:rounded-[30px] px-3">
+    <div class="w-full max-w-175 sm:border-4 sm:border-[#573440] sm:rounded-[30px] px-3 transition-colors duration-300">
       <Navbar />
       <RouterView />
     </div>

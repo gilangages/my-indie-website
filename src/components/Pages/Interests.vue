@@ -1,20 +1,46 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
-// Pastikan path-nya sesuai dengan struktur foldermu
 import ArtModal from "../Modal/ArtModal.vue";
 import WebModal from "../Modal/WebModal.vue";
-import GameModal from "../Modal/GameModal.vue"; // 1. Import GameModal
+import GameModal from "../Modal/GameModal.vue";
+import clickSfxFile from "../../assets/audio/click-main.mp3"; // <-- (1) Import Audio
 
+// --- SETUP AUDIO ---
+const clickAudio = new Audio(clickSfxFile);
+clickAudio.volume = 0.1; // <-- (2) Volume sesuai request (0.1)
+
+const playClickSound = () => {
+  clickAudio.currentTime = 0;
+  clickAudio.play().catch((e) => console.error(e));
+};
+
+// --- STATE MODAL ---
 const showArtModal = ref(false);
 const showWebModal = ref(false);
-const showGameModal = ref(false); // 2. State baru untuk GameModal
+const showGameModal = ref(false);
 
-// Update: ESC untuk nutup semua modal
+// --- FUNGSI KLIK (Bunyi + Buka Modal) ---
+const openArt = () => {
+  playClickSound();
+  showArtModal.value = true;
+};
+
+const openWeb = () => {
+  playClickSound();
+  showWebModal.value = true;
+};
+
+const openGame = () => {
+  playClickSound();
+  showGameModal.value = true;
+};
+
+// ESC untuk nutup semua modal
 const onKeydown = (e) => {
   if (e.key === "Escape") {
     showArtModal.value = false;
     showWebModal.value = false;
-    showGameModal.value = false; // 3. Reset state game juga
+    showGameModal.value = false;
   }
 };
 
@@ -32,7 +58,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown));
 
       <button
         class="block my-4 mx-auto px-2 py-1 border border-[#573440] rounded text-xs transition-transform duration-200 hover:scale-103 cursor-pointer hover:bg-bg-hover"
-        @click="showArtModal = true">
+        @click="openArt">
         see my artworks
       </button>
     </div>
@@ -46,7 +72,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown));
 
       <button
         class="block my-4 mx-auto px-2 py-1 border border-[#573440] rounded text-xs transition-transform duration-200 hover:scale-103 cursor-pointer hover:bg-bg-hover"
-        @click="showWebModal = true">
+        @click="openWeb">
         see my web projects
       </button>
     </div>
@@ -60,7 +86,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown));
 
       <button
         class="block my-4 mx-auto px-2 py-1 border border-[#573440] rounded text-xs transition-transform duration-200 hover:scale-103 cursor-pointer hover:bg-bg-hover"
-        @click="showGameModal = true">
+        @click="openGame">
         see my game
       </button>
     </div>

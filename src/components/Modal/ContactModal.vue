@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import bannerImg from "../../assets/others/me-email-crop-removebg.png";
+import clickSfxFile from "../../assets/audio/click-main.mp3"; // <-- (1) Import Audio
 
 defineProps({
   open: Boolean,
@@ -11,6 +12,17 @@ const emit = defineEmits(["close"]);
 const isMobile = ref(false);
 const emailText = "qbdian@gmail.com";
 const copyTooltip = ref("Copy to clipboard");
+
+// --- (2) SETUP AUDIO ---
+const clickAudio = new Audio(clickSfxFile);
+clickAudio.volume = 0.1;
+
+// Fungsi handle close (Bunyi dulu, baru emit close)
+const handleClose = () => {
+  clickAudio.currentTime = 0;
+  clickAudio.play().catch((e) => console.error(e));
+  emit("close");
+};
 
 const copyToClipboard = () => {
   navigator.clipboard.writeText(emailText);
@@ -52,7 +64,7 @@ onUnmounted(() => {
             <div class="flex justify-end p-3 sm:p-4 z-20 relative transition-colors duration-300">
               <button
                 class="text-2xl transition-transform duration-200 hover:scale-115 cursor-pointer bg-transparent border-none"
-                @click="emit('close')">
+                @click="handleClose">
                 {{ isMobile ? "∨" : "[x]" }}
               </button>
             </div>

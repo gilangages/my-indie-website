@@ -1,10 +1,16 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 
-// --- 1. IMPORT GAMBAR (Sesuaikan path jika perlu) ---
+// --- 1. IMPORT GAMBAR ---
 import imgJayjo from "../../assets/traditional-art/jayjo.jpeg";
 import imgTotoro from "../../assets/digital-art/totoro.png";
 import imgRead from "../../assets/digital-art/read.png";
+
+// --- IMPORT AUDIO ---
+import clickSupportSrc from "../../assets/audio/click-support.mp3"; // Untuk hover Ibix
+import clickMainSrc from "../../assets/audio/click-main.mp3"; // Untuk tombol Close Modal Utama
+import popMainSrc from "../../assets/audio/pop-main.mp3"; // NEW: Untuk Buka Gambar (pop-main)
+import popSupportSrc from "../../assets/audio/pop-support.mp3"; // NEW: Untuk Tutup Gambar (pop-support)
 
 defineProps({
   open: Boolean,
@@ -31,16 +37,54 @@ const digitalArtworks = [
   { id: 3, src: imgRead, caption: "Eksperimen pewarnaan style watercolor" },
 ];
 
-// --- DATA ANIMATION ---
 const animationVideos = [
   { id: 1, src: "https://www.youtube.com/embed/ivdqOTAxlJo?controls=0&rel=0" },
   { id: 2, src: "https://www.youtube.com/embed/0ATh_Vc2SAQ?start=31&controls=0&rel=0" },
   { id: 3, src: "https://www.youtube.com/embed/0ATh_Vc2SAQ?start=31&controls=0&rel=0" },
 ];
 
-// --- 3. LOGIKA POPUP ---
+// --- 3. LOGIKA POPUP & AUDIO ---
+
+// Fungsi suara HOVER (Ibix Paint X)
+const playHoverSound = () => {
+  const audio = new Audio(clickSupportSrc);
+  audio.volume = 0.1;
+  audio.play().catch((err) => console.error("Audio hover error:", err));
+};
+
+// Fungsi suara KLIK (Tombol Close Modal Utama)
+const playClickSound = () => {
+  const audio = new Audio(clickMainSrc);
+  audio.volume = 0.1;
+  audio.play().catch((err) => console.error("Audio click error:", err));
+};
+
+// Wrapper untuk tombol close modal utama
+const handleClose = () => {
+  playClickSound();
+  emit("close");
+};
+
+// --- LOGIKA BUKA/TUTUP GAMBAR PREVIEW ---
+
+// 1. Buka Gambar (Bunyi pop-main.mp3)
 const openImage = (src, caption) => {
+  const audio = new Audio(popMainSrc);
+  audio.volume = 0.1;
+  audio.play().catch((err) => console.error("Audio open image error:", err));
+
   selectedImage.value = { src, caption };
+};
+
+// 2. Tutup Gambar (Bunyi pop-support.mp3)
+const closeImage = () => {
+  if (selectedImage.value) {
+    const audio = new Audio(popSupportSrc);
+    audio.volume = 0.1;
+    audio.play().catch((err) => console.error("Audio close image error:", err));
+
+    selectedImage.value = null;
+  }
 };
 
 const checkScreen = () => {
@@ -76,7 +120,7 @@ onUnmounted(() => {
               class="sticky top-0 z-10 flex justify-end p-3 border-b border-black/20 bg-bg-modal text-text-modal transition-colors duration-300">
               <button
                 class="cursor-pointer text-2xl transition-transform duration-200 hover:scale-110"
-                @click="emit('close')">
+                @click="handleClose">
                 {{ isMobile ? "∨" : "[x]" }}
               </button>
             </div>
@@ -85,7 +129,8 @@ onUnmounted(() => {
               <h1 class="uppercase text-3xl">Tools</h1>
               <div class="flex gap-4 mt-2">
                 <div
-                  class="border-2 px-3 py-1 rounded shadow-[1px_3px_1px_#2c1a20] transition-transform duration-200 hover:scale-95">
+                  @mouseenter="playHoverSound"
+                  class="border-2 px-3 py-1 rounded shadow-[1px_3px_1px_#2c1a20] transition-transform duration-200 hover:scale-95 cursor-default">
                   Ibix Paint X
                 </div>
               </div>
@@ -176,8 +221,10 @@ onUnmounted(() => {
       <div
         v-if="selectedImage"
         class="fixed inset-0 z-[100] flex items-center justify-center bg-bg-preview/90 backdrop-blur-sm p-4 cursor-zoom-out pointer-events-auto transition-colors duration-300"
-        @click="selectedImage = null">
-        <button class="absolute top-5 right-5 text-white text-4xl hover:text-gray-300 z-[101] cursor-pointer">
+        @click="closeImage">
+        <button
+          @click="closeImage"
+          class="absolute top-5 right-5 text-white text-4xl hover:text-gray-300 z-[101] cursor-pointer">
           &times;
         </button>
 
@@ -185,7 +232,7 @@ onUnmounted(() => {
           <img
             :src="selectedImage.src"
             class="max-w-full max-h-[80vh] object-contain shadow-2xl transition-transform duration-300 scale-100 cursor-zoom-out"
-            @click="selectedImage = null" />
+            @click="closeImage" />
           <p class="mt-4 text-text-preview text-center text-lg max-w-150 font-bold">
             {{ selectedImage.caption }}
           </p>
@@ -196,7 +243,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* CSS TRANSISI DAN SCROLLBAR */
+/* CSS TRANSISI DAN SCROLLBAR - TIDAK DIUBAH */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s ease;

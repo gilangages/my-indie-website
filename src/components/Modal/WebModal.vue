@@ -6,6 +6,10 @@ import imgKuizia from "../../assets/projects/kuizia.png";
 import imgCreative from "../../assets/projects/creative-photo-studio.png";
 import imgMealio from "../../assets/projects/mealio.png";
 
+// --- IMPORT AUDIO ---
+import clickSupportMp3 from "../../assets/audio/click-support.mp3";
+import clickMainMp3 from "../../assets/audio/click-main.mp3";
+
 defineProps({
   open: Boolean,
 });
@@ -50,6 +54,20 @@ const projects = [
   },
 ];
 
+// --- AUDIO LOGIC ---
+const playHoverSound = () => {
+  const audio = new Audio(clickSupportMp3);
+  audio.volume = 0.1;
+  audio.play();
+};
+
+const handleClose = () => {
+  const audio = new Audio(clickMainMp3);
+  audio.volume = 0.1;
+  audio.play();
+  emit("close");
+};
+
 onMounted(() => {
   checkScreen();
   window.addEventListener("resize", checkScreen);
@@ -79,7 +97,7 @@ onUnmounted(() => {
               class="sticky top-0 z-10 flex justify-end p-3 text-text-modal border-b border-black/20 bg-bg-modal transition-colors duration-300">
               <button
                 class="cursor-pointer text-2xl transition-transform duration-200 hover:scale-110"
-                @click="emit('close')">
+                @click="handleClose">
                 {{ isMobile ? "∨" : "[x]" }}
               </button>
             </div>
@@ -92,6 +110,7 @@ onUnmounted(() => {
                     <div
                       v-for="tool in tools"
                       :key="tool"
+                      @mouseenter="playHoverSound"
                       class="border-2 px-3 py-2 rounded shadow-[1px_3px_1px_#2c1a20] transition-transform duration-200 hover:scale-95 cursor-default">
                       {{ tool }}
                     </div>
@@ -104,6 +123,7 @@ onUnmounted(() => {
                     <div
                       v-for="stack in devStacks"
                       :key="stack"
+                      @mouseenter="playHoverSound"
                       class="border-2 px-3 py-2 rounded shadow-[1px_3px_1px_#2c1a20] transition-transform duration-200 hover:scale-95 cursor-default">
                       {{ stack }}
                     </div>

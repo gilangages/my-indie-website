@@ -6,7 +6,19 @@ import iconMusicOff from "../../assets/svg/music-off.svg?url";
 import iconMusicOn from "../../assets/svg/music-on.svg?url";
 import iconThemeNight from "../../assets/svg/theme-night.svg?url";
 import iconThemeLight from "../../assets/svg/theme-light.svg?url";
+
+// Import Audio Files
 import bgmFile from "../../assets/audio/whas-it-a-dream.mp3";
+import clickSfxFile from "../../assets/audio/click-main.mp3"; // Import efek suara klik
+
+// --- SETUP SOUND EFFECT (SFX) ---
+const clickAudio = new Audio(clickSfxFile);
+clickAudio.volume = 0.1; // Atur volume suara klik
+
+const playClickSound = () => {
+  clickAudio.currentTime = 0;
+  clickAudio.play().catch((e) => console.error("SFX Error:", e));
+};
 
 // --- 2. LOGIC MUSIC ---
 const isPlaying = ref(false);
@@ -15,6 +27,7 @@ audio.loop = true;
 audio.volume = 0.2;
 
 const toggleMusic = () => {
+  // HAPUS playClickSound() dari sini sesuai request
   if (isPlaying.value) {
     audio.pause();
     isPlaying.value = false;
@@ -52,6 +65,7 @@ onMounted(() => {
 });
 
 const toggleTheme = () => {
+  playClickSound(); // HANYA DI SINI (Tombol Theme)
   applyTheme(!isDark.value);
 };
 </script>

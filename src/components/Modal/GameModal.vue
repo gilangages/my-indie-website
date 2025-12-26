@@ -4,6 +4,10 @@ import { ref, onMounted, onUnmounted } from "vue";
 // --- 1. IMPORT GAMBAR ---
 import imgEscape from "../../assets/games/escape-from-the-house.png";
 
+// --- IMPORT AUDIO ---
+import clickSupportMp3 from "../../assets/audio/click-support.mp3";
+import clickMainMp3 from "../../assets/audio/click-main.mp3";
+
 defineProps({
   open: Boolean,
 });
@@ -20,7 +24,6 @@ const games = [
     id: 1,
     title: "Escape From the House: Horror Game",
     img: imgEscape,
-    // Update class di dalam string HTML agar ikut tema (text-accent)
     desc: `This is a horror game where you have to escape from a house. But of course, it’s not that easy — you need to find a key hidden somewhere inside first. I made this game for a college assignment. Honestly, I’m not even sure why I chose the horror genre. At that time, I just thought, “horror games are fun,” so I decided to make one. This game was made independently using various references I found on the internet. I uploaded this game for free on <a href="https://itch.io/" target="_blank" rel="noopener noreferrer" class="text-accent hover:opacity-80 font-bold underline transition-colors duration-300">itch.io</a>. If you’re interested in trying it out, you can download it for free.`,
     downloadLink: "https://qbdian.itch.io/escape-from-room",
   },
@@ -28,6 +31,20 @@ const games = [
 
 const checkScreen = () => {
   isMobile.value = window.innerWidth <= 600;
+};
+
+// --- AUDIO LOGIC ---
+const playToolHoverSound = () => {
+  const audio = new Audio(clickSupportMp3);
+  audio.volume = 0.1;
+  audio.play();
+};
+
+const handleClose = () => {
+  const audio = new Audio(clickMainMp3);
+  audio.volume = 0.1;
+  audio.play();
+  emit("close");
 };
 
 onMounted(() => {
@@ -59,7 +76,7 @@ onUnmounted(() => {
               class="sticky top-0 z-10 flex justify-end p-3 bg-bg-modal text-text-modal border-b border-black/20 transition-colors duration-300">
               <button
                 class="text-2xl transition-transform duration-200 hover:scale-110 bg-transparent border-none cursor-pointer"
-                @click="emit('close')">
+                @click="handleClose">
                 {{ isMobile ? "∨" : "[x]" }}
               </button>
             </div>
@@ -71,7 +88,8 @@ onUnmounted(() => {
                   <div
                     v-for="tool in tools"
                     :key="tool"
-                    class="border-2 px-3 py-1 rounded shadow-[1px_3px_1px_#2c1a20] transition-transform duration-200 hover:scale-95">
+                    @mouseenter="playToolHoverSound"
+                    class="border-2 px-3 py-1 rounded shadow-[1px_3px_1px_#2c1a20] transition-transform duration-200 hover:scale-95 cursor-default">
                     {{ tool }}
                   </div>
                 </div>
