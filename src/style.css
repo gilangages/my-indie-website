@@ -1,46 +1,84 @@
 @import url("https://fonts.googleapis.com/css2?family=Capriola&display=swap");
 @import "tailwindcss";
 
-/* 1. Definisikan Token Warna Kita Sendiri di @theme */
+/* 1. SETUP TEMA */
 @theme {
-  /* Kita namain warnanya 'primary' dan 'text-primary' */
-  /* Variable ini akan membaca nilai dari CSS Variable di bawah */
+  /* Global Vars */
   --color-bg-primary: var(--bg-primary);
   --color-text-primary: var(--text-primary);
-
-  /* Tambahan warna lain kalau butuh */
   --color-accent: var(--accent);
-}
 
-/* 2. Atur Nilai Warnanya (Light Mode & Dark Mode) */
-:root {
-  /* === MODE TERANG (Light) === */
-  --bg-primary: #fff5f5; /* Warna krem */
-  --text-primary: #000000; /* Tulisan hitam */
-  --accent: #993f4b; /* Warna merah marun */
+  /* --- KHUSUS MODAL (BARU) --- */
+  /* Kita buat class 'bg-modal' dan 'text-modal' */
+  --color-bg-modal: var(--bg-modal);
+  --color-text-modal: var(--text-modal);
+
+  /* --- KHUSUS PREVIEW GAMBAR (BARU) --- */
+  /* Kita daftarkan class 'bg-preview' */
+  --color-bg-preview: var(--bg-preview);
+  --color-text-preview: var(--text-preview); /* Warna teks caption saat zoom */
+
+  --color-bg-hover: var(--bg-hover);
+
   --font-display: "Capriola", sans-serif;
-  --text-big: 2em;
-  --color-black: #000000;
 }
 
-/* Ketika class 'dark' aktif di HTML, nilai variabel berubah otomatis */
-.dark {
-  /* === MODE GELAP (Dark) === */
-  --bg-primary: #573440; /* Warna pink tua/coklat */
-  --text-primary: #ffffff; /* Tulisan putih */
-  --accent: #ffb3c1; /* Warna aksen jadi lebih terang di mode gelap */
-}
-
-/* (Opsional) Styling Global biar gak perlu nulis di setiap div */
+/* 2. DEFINISI LOGIKA WARNA */
 @layer base {
+  :root {
+    /* === MODE TERANG (Light) === */
+    /* Global */
+    --bg-primary: #fff5f5;
+    --text-primary: #000000;
+    --accent: #993f4b;
+
+    /* --- KHUSUS MODAL (Light) --- */
+    /* Request: Bg #fff5f5, Text #573440 */
+    --bg-modal: #fff5f5;
+    --text-modal: #573440;
+
+    /* --- WARNA BACKGROUND PREVIEW (LIGHT) --- */
+    /* Contoh: Hitam transparan (biar gambar tetap pop-up) atau Putih krem */
+    /* Kamu bisa ganti hex code ini sesuai selera */
+    --bg-preview: #fff5f5; /*2c1a20;*/
+    /* Teks Caption: Pink lembut / Krem */
+    --text-preview: #e8b4b8;
+
+    /* --- CUSTOM HOVER UNTUK LIGHT MODE --- */
+    /* Ganti kode warna ini sesuai selera! */
+    /* Contoh: Merah marun sangat muda/transparan (supaya tidak hitam legam) */
+    --bg-hover: rgba(153, 63, 75, 0.1);
+  }
+
+  .dark {
+    /* === MODE GELAP (Dark) === */
+    /* Global */
+    --bg-primary: #000000;
+    --text-primary: #ffffff;
+    --accent: #ffb3c1;
+
+    /* --- KHUSUS MODAL (Dark) --- */
+    /* Request: Bg #573440, Text #000 */
+    --bg-modal: #573440;
+    --text-modal: #000000;
+
+    /* --- WARNA BACKGROUND PREVIEW (DARK) --- */
+    /* Contoh: Hitam pekat atau Pink tua */
+    --bg-preview: #2c1a20;
+    /* Teks Caption: Putih terang */
+    --text-preview: #e8b4b8;
+
+    /* --- HOVER UNTUK DARK MODE (TETAP HITAM) --- */
+    /* Ini sesuai request kamu: "biarkan seperti sebelumnya" */
+    --bg-hover: #121212;
+  }
+
+  /* Setting Global Body */
   body {
-    /* Gunakan variable yang sudah kita buat tadi */
     background-color: var(--bg-primary);
     color: var(--text-primary);
-
-    /* Biar transisi warnanya mulus saat diklik */
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: "Capriola", sans-serif;
+    transition-property: color, background-color, border-color;
     transition-duration: 300ms;
   }
 }

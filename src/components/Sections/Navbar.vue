@@ -34,20 +34,20 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown));
   <div class="grid grid-cols-3 gap-4 mt-[-1.5em] mb-4 justify-center items-center pt-4 max-sm:grid-cols-3">
     <router-link to="/" exact-active-class="underline underline-offset-4 decoration-[#a95964]">
       <div
-        class="text-center text-[24px] max-sm:text-[20px] border-[1.5px] border-[#573440] rounded-xl text-[#a95964] px-8 max-sm:px-2 max-sm:py-1 transition-transform duration-200 hover:scale-105 hover:bg-[#121212] cursor-pointer">
+        class="text-center text-[24px] max-sm:text-[20px] border-[1.5px] border-[#573440] rounded-xl text-[#a95964] px-8 max-sm:px-2 max-sm:py-1 transition-transform duration-200 hover:scale-105 hover:bg-bg-hover cursor-pointer">
         About
       </div>
     </router-link>
     <router-link to="/interests" exact-active-class="underline underline-offset-4 decoration-[#a95964]">
       <div
-        class="text-center text-[24px] max-sm:text-[20px] border-[1.5px] border-[#573440] rounded-xl text-[#a95964] px-8 max-sm:px-2 max-sm:py-1 transition-transform duration-200 hover:scale-105 hover:bg-[#121212] cursor-pointer">
+        class="text-center text-[24px] max-sm:text-[20px] border-[1.5px] border-[#573440] rounded-xl text-[#a95964] px-8 max-sm:px-2 max-sm:py-1 transition-transform duration-200 hover:scale-105 hover:bg-bg-hover cursor-pointer">
         Interests
       </div>
     </router-link>
 
     <router-link to="/find-me" active-class="underline underline-offset-4 decoration-[#a95964]">
       <div
-        class="text-center text-[24px] max-sm:text-[20px] border-[1.5px] border-[#573440] rounded-xl text-[#a95964] px-8 max-sm:px-2 max-sm:py-1 transition-transform duration-200 hover:scale-105 hover:bg-[#121212] cursor-pointer">
+        class="text-center text-[24px] max-sm:text-[20px] border-[1.5px] border-[#573440] rounded-xl text-[#a95964] px-8 max-sm:px-2 max-sm:py-1 transition-transform duration-200 hover:scale-105 hover:bg-bg-hover cursor-pointer">
         Find Me
       </div>
     </router-link>

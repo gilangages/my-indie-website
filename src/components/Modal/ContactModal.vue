@@ -39,24 +39,19 @@ onUnmounted(() => {
     <transition name="fade">
       <div
         v-show="open"
-        class="fixed inset-0 z-50 bg-black/70 flex justify-center"
-        :class="isMobile ? 'items-end' : 'items-center'"
-        @click.self="emit('close')">
+        class="fixed inset-0 z-50 flex justify-center pointer-events-none"
+        :class="isMobile ? 'items-end' : 'items-center'">
         <transition :name="isMobile ? 'sheet' : 'scale'">
           <div
             v-show="open"
             :class="
-              isMobile /* MOBILE STYLE (FIXED HEIGHT):
-                   - h-[85vh]: Kunci tingginya 85% dari layar.
-                     Jadi modal GAK AKAN TURUN walau isinya diedit-edit.
-                   - rounded-t-[20px]: Sudut atas melengkung.
-                */
-                ? 'fixed bottom-0 left-0 right-0 h-[85vh] rounded-t-[20px] bg-[#573440] text-black overflow-hidden flex flex-col' /* DESKTOP STYLE */
-                : 'relative w-auto min-w-[400px] max-w-[1000px] h-fit max-h-[95vh] rounded-[20px] bg-[#573440] text-black overflow-hidden flex flex-col shadow-2xl'
+              isMobile
+                ? 'fixed bottom-0 left-0 right-0 h-[85vh] rounded-t-[20px] bg-bg-modal text-text-modal overflow-hidden flex flex-col pointer-events-auto shadow-[0_-5px_30px_rgba(0,0,0,0.3)] transition-colors duration-300'
+                : 'relative w-auto min-w-[400px] max-w-[1000px] h-fit max-h-[95vh] rounded-[20px] bg-bg-modal text-text-modal overflow-hidden flex flex-col shadow-2xl pointer-events-auto  transition-colors duration-300 border-2 border-black/10'
             ">
-            <div class="flex justify-end p-3 sm:p-4 z-20 relative">
+            <div class="flex justify-end p-3 sm:p-4 z-20 relative transition-colors duration-300">
               <button
-                class="text-2xl transition-transform duration-200 hover:scale-115 cursor-pointer bg-transparent border-none text-black"
+                class="text-2xl transition-transform duration-200 hover:scale-115 cursor-pointer bg-transparent border-none"
                 @click="emit('close')">
                 {{ isMobile ? "∨" : "[x]" }}
               </button>
@@ -106,7 +101,7 @@ onUnmounted(() => {
                 <div class="mt-4">
                   <a
                     :href="`mailto:${emailText}`"
-                    class="inline-block bg-[#794055] text-black px-6 py-3 rounded-lg text-base no-underline transition-colors hover:bg-[#8f4a63] cursor-pointer shadow-lg">
+                    class="inline-block bg-[#794055] text-[#432832] px-6 py-3 rounded-lg text-base no-underline transition-colors hover:bg-[#8f4a63] cursor-pointer shadow-lg">
                     send me an email!
                   </a>
                 </div>
@@ -120,7 +115,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* CSS SAMA SEPERTI SEBELUMNYA */
+/* CSS BAWAAN TETAP AMAN */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s ease;

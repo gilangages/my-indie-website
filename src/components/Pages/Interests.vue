@@ -31,7 +31,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown));
       </p>
 
       <button
-        class="block my-4 mx-auto px-2 py-1 border border-[#573440] rounded text-xs transition-transform duration-200 hover:scale-103 cursor-pointer hover:bg-[#1d1d1d]"
+        class="block my-4 mx-auto px-2 py-1 border border-[#573440] rounded text-xs transition-transform duration-200 hover:scale-103 cursor-pointer hover:bg-bg-hover"
         @click="showArtModal = true">
         see my artworks
       </button>
@@ -45,7 +45,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown));
       </p>
 
       <button
-        class="block my-4 mx-auto px-2 py-1 border border-[#573440] rounded text-xs transition-transform duration-200 hover:scale-103 cursor-pointer hover:bg-[#1d1d1d]"
+        class="block my-4 mx-auto px-2 py-1 border border-[#573440] rounded text-xs transition-transform duration-200 hover:scale-103 cursor-pointer hover:bg-bg-hover"
         @click="showWebModal = true">
         see my web projects
       </button>
@@ -59,7 +59,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown));
       </p>
 
       <button
-        class="block my-4 mx-auto px-2 py-1 border border-[#573440] rounded text-xs transition-transform duration-200 hover:scale-103 cursor-pointer hover:bg-[#1d1d1d]"
+        class="block my-4 mx-auto px-2 py-1 border border-[#573440] rounded text-xs transition-transform duration-200 hover:scale-103 cursor-pointer hover:bg-bg-hover"
         @click="showGameModal = true">
         see my game
       </button>

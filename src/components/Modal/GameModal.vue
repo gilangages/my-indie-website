@@ -2,7 +2,6 @@
 import { ref, onMounted, onUnmounted } from "vue";
 
 // --- 1. IMPORT GAMBAR ---
-// Pastikan path ini benar sesuai struktur foldermu
 import imgEscape from "../../assets/games/escape-from-the-house.png";
 
 defineProps({
@@ -21,8 +20,8 @@ const games = [
     id: 1,
     title: "Escape From the House: Horror Game",
     img: imgEscape,
-    // Karena ada link di tengah kalimat, kita pakai HTML string
-    desc: `This is a horror game where you have to escape from a house. But of course, it’s not that easy — you need to find a key hidden somewhere inside first. I made this game for a college assignment. Honestly, I’m not even sure why I chose the horror genre. At that time, I just thought, “horror games are fun,” so I decided to make one. This game was made independently using various references I found on the internet. I uploaded this game for free on <a href="https://itch.io/" target="_blank" rel="noopener noreferrer" class="text-[#8f4a63] hover:text-[#794055] font-bold underline">itch.io</a>. If you’re interested in trying it out, you can download it for free.`,
+    // Update class di dalam string HTML agar ikut tema (text-accent)
+    desc: `This is a horror game where you have to escape from a house. But of course, it’s not that easy — you need to find a key hidden somewhere inside first. I made this game for a college assignment. Honestly, I’m not even sure why I chose the horror genre. At that time, I just thought, “horror games are fun,” so I decided to make one. This game was made independently using various references I found on the internet. I uploaded this game for free on <a href="https://itch.io/" target="_blank" rel="noopener noreferrer" class="text-accent hover:opacity-80 font-bold underline transition-colors duration-300">itch.io</a>. If you’re interested in trying it out, you can download it for free.`,
     downloadLink: "https://qbdian.itch.io/escape-from-room",
   },
 ];
@@ -46,18 +45,18 @@ onUnmounted(() => {
     <transition name="fade">
       <div
         v-show="open"
-        class="fixed inset-0 z-50 bg-black/70 flex justify-center font-['Capriola',_sans-serif]"
-        :class="isMobile ? 'items-end' : 'items-center'"
-        @click.self="emit('close')">
+        class="fixed inset-0 z-50 flex justify-center pointer-events-none"
+        :class="isMobile ? 'items-end' : 'items-center'">
         <transition :name="isMobile ? 'sheet' : 'scale'">
           <div
             v-show="open"
             :class="
               isMobile
-                ? 'fixed bottom-0 left-0 right-0 max-h-[90vh] min-h-[60vh] rounded-t-[20px] bg-[#573440] text-black overflow-hidden flex flex-col'
-                : 'absolute inset-0 m-auto w-[90%] max-w-[960px] max-h-[85vh] rounded-[20px] bg-[#573440] text-black overflow-hidden flex flex-col'
+                ? 'fixed bottom-0 left-0 right-0 max-h-[90vh] min-h-[60vh] rounded-t-[20px] bg-bg-modal text-text-modal overflow-hidden flex flex-col pointer-events-auto shadow-[0_-5px_30px_rgba(0,0,0,0.3)] transition-colors duration-300'
+                : 'absolute inset-0 m-auto w-[90%] max-w-[960px] max-h-[85vh] rounded-[20px] bg-bg-modal text-text-modal overflow-hidden flex flex-col pointer-events-auto shadow-2xl border-2 border-black/10 transition-colors duration-300'
             ">
-            <div class="sticky top-0 z-10 flex justify-end p-3 bg-[#573440] border-b border-black/20">
+            <div
+              class="sticky top-0 z-10 flex justify-end p-3 bg-bg-modal text-text-modal border-b border-black/20 transition-colors duration-300">
               <button
                 class="text-2xl transition-transform duration-200 hover:scale-110 bg-transparent border-none cursor-pointer"
                 @click="emit('close')">
@@ -72,13 +71,13 @@ onUnmounted(() => {
                   <div
                     v-for="tool in tools"
                     :key="tool"
-                    class="border-2 border-black px-3 py-1 rounded shadow-[1px_3px_1px_#2c1a20] transition-transform duration-200 hover:scale-95 bg-[#573440]">
+                    class="border-2 px-3 py-1 rounded shadow-[1px_3px_1px_#2c1a20] transition-transform duration-200 hover:scale-95">
                     {{ tool }}
                   </div>
                 </div>
               </div>
 
-              <hr class="my-6 h-[3px] border-none bg-[#432832]" />
+              <hr class="my-6 h-[3px] border-none bg-black/10" />
 
               <div id="games-wrapper">
                 <h1 class="uppercase text-2xl font-bold">3d Game</h1>
@@ -94,7 +93,7 @@ onUnmounted(() => {
                     </div>
 
                     <div class="flex flex-col w-full text-center sm:text-left">
-                      <h1 class="text-[#993f4b] text-xl font-bold mb-2">
+                      <h1 class="text-accent text-xl font-bold mb-2 transition-colors duration-300">
                         {{ game.title }}
                       </h1>
 
@@ -105,7 +104,7 @@ onUnmounted(() => {
                           :href="game.downloadLink"
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="inline-block px-8 py-3 rounded-lg bg-[#794055] text-[#432832] font-semibold no-underline transition-colors hover:bg-[#8f4a63]">
+                          class="inline-block px-8 py-3 rounded-lg bg-accent text-white font-semibold no-underline transition-all duration-300 hover:opacity-80">
                           download
                         </a>
                       </div>
@@ -114,7 +113,7 @@ onUnmounted(() => {
                 </div>
               </div>
 
-              <hr class="my-8 h-[3px] border-none bg-[#432832]" />
+              <hr class="my-8 h-[3px] border-none bg-black/10" />
             </div>
           </div>
         </transition>
@@ -124,9 +123,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* Transisi dan Scrollbar persis seperti ArtModal/WebModal */
-
-/* fade overlay */
+/* Transisi Overlay */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s ease;
@@ -136,7 +133,7 @@ onUnmounted(() => {
   opacity: 0;
 }
 
-/* desktop scale */
+/* Transisi Desktop Scale */
 .scale-enter-active,
 .scale-leave-active {
   transition: transform 0.25s ease, opacity 0.25s ease;
@@ -147,7 +144,7 @@ onUnmounted(() => {
   opacity: 0;
 }
 
-/* mobile bottom sheet */
+/* Transisi Mobile Sheet */
 .sheet-enter-active {
   transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -167,23 +164,20 @@ onUnmounted(() => {
   transform: translateY(100%);
 }
 
-/* custom scrollbar */
+/* Custom Scrollbar Dinamis */
 .custom-scroll::-webkit-scrollbar {
   width: 8px;
 }
 .custom-scroll::-webkit-scrollbar-track {
-  background: #432832;
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 .custom-scroll::-webkit-scrollbar-thumb {
-  background-color: #8f4a63;
+  background-color: var(--color-accent);
   border-radius: 10px;
-}
-.custom-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: #a65772;
 }
 .custom-scroll {
   scrollbar-width: thin;
-  scrollbar-color: #8f4a63 #432832;
+  scrollbar-color: var(--color-accent) transparent;
 }
 </style>

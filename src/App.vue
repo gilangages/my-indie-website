@@ -1,12 +1,8 @@
 <script setup></script>
 <template>
-  <RouterView />
+  <div class="font-display w-full bg-bg-primary text-text-primary transition-colors duration-300">
+    <RouterView />
+  </div>
 </template>
 
-<style>
-/* global font */
-body {
-  font-family: Capriola, sans-serif;
-  background-color: #000;
-}
-</style>
+<style></style>

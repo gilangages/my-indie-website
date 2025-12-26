@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
-// 1. Import dulu gambarnya satu per satu dari folder assets
-// Pastikan jumlah ../ sesuai dengan kedalaman folder komponen kamu
+// 1. Import gambar
 import imgLiveScore from "../../assets/projects/live-score-counter.png";
 import imgKuizia from "../../assets/projects/kuizia.png";
 import imgCreative from "../../assets/projects/creative-photo-studio.png";
@@ -24,12 +23,11 @@ const tools = ["Github", "Figma", "Vs Code"];
 const devStacks = ["Html/CSS", "JavaScript", "Vue.js", "React.js", "PHP"];
 
 // Data Projects
-// Catatan: Pastikan path gambar ('src') sesuai dengan struktur folder projectmu.
 const projects = [
   {
     title: "Live Score Counter",
-    img: imgLiveScore, // Sesuaikan path ini
-    desc: "I made this website to calculate match scores between two teams. You can set the winning score, and if youfind it useful, feel free to use it.",
+    img: imgLiveScore,
+    desc: "I made this website to calculate match scores between two teams. You can set the winning score, and if you find it useful, feel free to use it.",
     link: "https://abdian.vercel.app/proyek1-creativephoto/index.html",
   },
   {
@@ -67,19 +65,21 @@ onUnmounted(() => {
     <transition name="fade">
       <div
         v-show="open"
-        class="fixed inset-0 z-50 bg-black/70 flex justify-center font-['Capriola',_sans-serif]"
-        :class="isMobile ? 'items-end' : 'items-center'"
-        @click.self="emit('close')">
+        class="fixed inset-0 z-50 flex justify-center pointer-events-none"
+        :class="isMobile ? 'items-end' : 'items-center'">
         <transition :name="isMobile ? 'sheet' : 'scale'">
           <div
             v-show="open"
             :class="
               isMobile
-                ? 'fixed bottom-0 left-0 right-0 max-h-[90vh] min-h-[60vh] rounded-t-[20px] bg-[#573440] text-black overflow-hidden flex flex-col'
-                : 'absolute inset-0 m-auto w-[90%] max-w-[960px] max-h-[85vh] rounded-[20px] bg-[#573440] text-black overflow-hidden flex flex-col'
+                ? 'fixed bottom-0 left-0 right-0 max-h-[90vh] min-h-[60vh] rounded-t-[20px] bg-bg-modal text-text-modal overflow-hidden flex flex-col pointer-events-auto shadow-[0_-5px_30px_rgba(0,0,0,0.3)] transition-colors duration-300'
+                : 'absolute inset-0 m-auto w-[90%] max-w-[960px] max-h-[85vh] rounded-[20px] bg-bg-modal text-text-modal overflow-hidden flex flex-col pointer-events-auto shadow-2xl border-2 border-black/10 transition-colors duration-300'
             ">
-            <div class="sticky top-0 z-10 flex justify-end p-3 bg-[#573440] border-b border-black/20">
-              <button class="text-2xl transition-transform duration-200 hover:scale-110" @click="emit('close')">
+            <div
+              class="sticky top-0 z-10 flex justify-end p-3 text-text-modal border-b border-black/20 bg-bg-modal transition-colors duration-300">
+              <button
+                class="cursor-pointer text-2xl transition-transform duration-200 hover:scale-110"
+                @click="emit('close')">
                 {{ isMobile ? "∨" : "[x]" }}
               </button>
             </div>
@@ -92,7 +92,7 @@ onUnmounted(() => {
                     <div
                       v-for="tool in tools"
                       :key="tool"
-                      class="border-2 border-black px-3 py-2 rounded shadow-[1px_3px_1px_#2c1a20] transition-transform duration-200 hover:scale-96 cursor-default bg-[#573440]">
+                      class="border-2 px-3 py-2 rounded shadow-[1px_3px_1px_#2c1a20] transition-transform duration-200 hover:scale-95 cursor-default">
                       {{ tool }}
                     </div>
                   </div>
@@ -104,14 +104,14 @@ onUnmounted(() => {
                     <div
                       v-for="stack in devStacks"
                       :key="stack"
-                      class="border-2 border-black px-3 py-2 rounded shadow-[1px_3px_1px_#2c1a20] transition-transform duration-200 hover:scale-96 cursor-default bg-[#573440]">
+                      class="border-2 px-3 py-2 rounded shadow-[1px_3px_1px_#2c1a20] transition-transform duration-200 hover:scale-95 cursor-default">
                       {{ stack }}
                     </div>
                   </div>
                 </div>
               </div>
 
-              <hr class="my-8 h-[3px] border-none bg-[#432832]" />
+              <hr class="my-8 h-[3px] border-none bg-black/10" />
 
               <div id="projects" class="flex flex-col">
                 <h1 class="text-2xl font-bold uppercase">My Projects</h1>
@@ -126,7 +126,7 @@ onUnmounted(() => {
                     </div>
 
                     <div class="flex flex-col h-full w-full">
-                      <h2 class="text-[#993f4b] text-xl font-bold m-0 p-0 mb-2">
+                      <h2 class="text-accent text-xl font-bold m-0 p-0 mb-2">
                         {{ project.title }}
                       </h2>
                       <p class="text-justify leading-relaxed mb-4">
@@ -137,23 +137,25 @@ onUnmounted(() => {
                           :href="project.link"
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="inline-block px-12 py-3 rounded-lg bg-[#794055] text-[#432832] font-semibold no-underline transition-colors hover:bg-[#8f4a63]">
+                          class="inline-block px-12 py-3 rounded-lg bg-accent text-white font-semibold no-underline transition-opacity hover:opacity-80">
                           see
                         </a>
                       </div>
                     </div>
                   </div>
 
-                  <hr v-if="index < projects.length - 1" class="my-2 h-[3px] border-none bg-[#432832]" />
+                  <hr v-if="index < projects.length - 1" class="my-2 h-[3px] border-none bg-black/10" />
                 </div>
               </div>
-              <hr class="my-8 h-[3px] border-none bg-[#432832]" />
+
+              <hr class="my-8 h-[3px] border-none bg-black/10" />
+
               <div id="other" class="flex flex-col">
                 <h2 class="text-xl font-bold mb-4">Other dev projects:</h2>
                 <ul class="list-disc list-outside pl-5">
                   <li>this website!</li>
                   <li>
-                    that’s all for now, there are some projects i’m working on behind the scenes, and i’m excited to
+                    that’s all for now, there are some projects i’m working on behind the scenes and i’m excited to
                     share them soon (˶ᵔ ᵕ ᵔ˶).
                   </li>
                 </ul>
@@ -165,7 +167,7 @@ onUnmounted(() => {
                   <a
                     target="_blank"
                     href="https://github.com/gilangages"
-                    class="text-[#8f4a63] hover:text-[#794055] font-bold underline">
+                    class="text-accent hover:opacity-80 font-bold underline">
                     Github
                   </a>
                 </p>
@@ -179,9 +181,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* Transisi & Scrollbar sama persis dengan ArtModal */
-
-/* fade overlay */
+/* Transisi Overlay */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s ease;
@@ -191,7 +191,7 @@ onUnmounted(() => {
   opacity: 0;
 }
 
-/* desktop scale */
+/* Transisi Desktop Scale */
 .scale-enter-active,
 .scale-leave-active {
   transition: transform 0.25s ease, opacity 0.25s ease;
@@ -202,7 +202,7 @@ onUnmounted(() => {
   opacity: 0;
 }
 
-/* mobile bottom sheet */
+/* Transisi Mobile Sheet */
 .sheet-enter-active {
   transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -222,23 +222,20 @@ onUnmounted(() => {
   transform: translateY(100%);
 }
 
-/* custom scrollbar */
+/* Custom Scrollbar (Dinamis mengikuti Warna Aksen) */
 .custom-scroll::-webkit-scrollbar {
   width: 8px;
 }
 .custom-scroll::-webkit-scrollbar-track {
-  background: #432832;
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 .custom-scroll::-webkit-scrollbar-thumb {
-  background-color: #8f4a63;
+  background-color: var(--color-accent);
   border-radius: 10px;
-}
-.custom-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: #a65772;
 }
 .custom-scroll {
   scrollbar-width: thin;
-  scrollbar-color: #8f4a63 #432832;
+  scrollbar-color: var(--color-accent) transparent;
 }
 </style>
