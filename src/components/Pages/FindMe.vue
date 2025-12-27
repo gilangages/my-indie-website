@@ -1,6 +1,6 @@
 <script setup>
 // 1. IMPORT ASSETS GAMBAR
-import iconYt from "../../assets/svg/yt.svg?url";
+import iconYt from "../../assets/svg/youtube.svg?url";
 import iconIg from "../../assets/svg/instagram.svg?url";
 import iconTiktok from "../../assets/svg/tiktok.svg?url";
 import clickSfxFile from "../../assets/audio/click-main.mp3"; // <-- (1) Import Audio

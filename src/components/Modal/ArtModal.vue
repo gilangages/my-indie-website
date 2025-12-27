@@ -154,7 +154,7 @@ onUnmounted(() => {
                   See More on
                   <a
                     target="_blank"
-                    href="https://instagram.com/yourusername"
+                    href="https://www.instagram.com/abdian.sketch"
                     class="text-accent hover:opacity-80 font-bold underline">
                     Instagram
                   </a>
@@ -180,7 +180,7 @@ onUnmounted(() => {
                   See More on
                   <a
                     target="_blank"
-                    href="https://youtube.com/@yourchannel"
+                    href="https://www.youtube.com/@abdiannn"
                     class="text-accent hover:opacity-80 font-bold underline">
                     Youtube
                   </a>
@@ -208,7 +208,12 @@ onUnmounted(() => {
               <div class="mt-2 max-sm:my-4 sm:text-left">
                 <p>
                   See More on
-                  <a target="_blank" href="#" class="text-accent hover:opacity-80 font-bold underline">Youtube</a>
+                  <a
+                    target="_blank"
+                    href="https://www.youtube.com/@abdiannn"
+                    class="text-accent hover:opacity-80 font-bold underline">
+                    Youtube
+                  </a>
                 </p>
               </div>
             </div>
