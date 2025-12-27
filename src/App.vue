@@ -135,11 +135,11 @@ onUnmounted(() => {
       class="fixed bottom-5 left-5 z-50 p-2 rounded-full border transition-all duration-300 group hover:scale-110 focus:outline-none shadow-lg cursor-pointer"
       :class="[
         isDark
-          ? 'bg-slate-900/50 border-slate-700 text-yellow-400 hover:bg-slate-800/80 hover:shadow-yellow-400/20'
-          : 'bg-white/50 border-white text-red-400 hover:bg-white/80 hover:shadow-red-400/20',
+          ? 'bg-slate-900/50 border-slate-700 text-[#573440] hover:bg-slate-800/80 hover:shadow-yellow-400/20'
+          : 'bg-white/50 border-white text-[#993f4b] hover:bg-white/80 hover:shadow-red-400/20',
       ]"
       style="backdrop-filter: blur(8px)"
-      :title="showAnimation ? 'Matikan Animasi' : 'Nyalakan Animasi'">
+      :title="showAnimation ? 'Disable Animation' : 'Enable Animation'">
       <svg
         v-if="showAnimation"
         xmlns="http://www.w3.org/2000/svg"
