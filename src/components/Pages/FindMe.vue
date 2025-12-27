@@ -41,7 +41,7 @@ const socials = [
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-4 text-[#993f4b] mx-2 mt-4 mb-8">
+  <div class="grid grid-cols-1 gap-4 text-[#993f4b] mx-2 mt-4 mb-7">
     <div
       v-for="social in socials"
       :key="social.id"
