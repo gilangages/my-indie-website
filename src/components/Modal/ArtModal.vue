@@ -7,6 +7,7 @@ import haise from "../../assets/traditional-art/one.jpeg";
 import yuta from "../../assets/traditional-art/two.jpeg";
 import imgTotoro from "../../assets/digital-art/totoro.png";
 import imgRead from "../../assets/digital-art/read.png";
+import imgHehe from "../../assets/digital-art/hehe.png";
 
 // --- IMPORT AUDIO ---
 import clickSupportSrc from "../../assets/audio/click-support.mp3"; // Untuk hover Ibix
@@ -25,15 +26,15 @@ const selectedImage = ref(null);
 
 // --- 2. DATA ARTWORKS ---
 const traditionalArtworks = [
-  { id: 1, src: imgJayjo, caption: "Sketch karakter Jayjo dari Webtoon Windbreaker" },
+  { id: 1, src: imgJayjo, caption: "Jayjo from manga Windbreaker" },
   { id: 2, src: haise, caption: "Ken Kaneki and Touka from manga Tokyo Ghoul" },
   { id: 2, src: yuta, caption: "Yuta Okkotsu from manga Jujutsu Kaisen" },
 ];
 
 const digitalArtworks = [
-  { id: 1, src: imgTotoro, caption: "Fanart Totoro yang gemoy (Ghibli Studio)" },
-  { id: 2, src: imgRead, caption: "Original Character: Gadis yang suka membaca" },
-  { id: 3, src: imgRead, caption: "Eksperimen pewarnaan style watercolor" },
+  { id: 1, src: imgTotoro, caption: "Fanart Totoro (Ghibli Studio), reference from pinterest" },
+  { id: 2, src: imgRead, caption: "My first draw in ibis paint x" },
+  { id: 3, src: imgHehe, caption: "Girl and Boy, reference from pinterest" },
 ];
 
 const animationVideos = [

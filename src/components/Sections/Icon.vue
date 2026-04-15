@@ -8,7 +8,7 @@ import iconThemeNight from "../../assets/svg/theme-night.svg?url";
 import iconThemeLight from "../../assets/svg/theme-light.svg?url";
 
 // Import Audio Files
-import bgmFile from "../../assets/audio/whas-it-a-dream.mp3";
+import bgmFile from "../../assets/audio/bgm-main.mp3";
 import clickSfxFile from "../../assets/audio/click-main.mp3"; // Import efek suara klik
 
 // --- SETUP SOUND EFFECT (SFX) ---
@@ -24,7 +24,7 @@ const playClickSound = () => {
 const isPlaying = ref(false);
 const audio = new Audio(bgmFile);
 audio.loop = true;
-audio.volume = 0.2;
+audio.volume = 1;
 
 const toggleMusic = () => {
   // HAPUS playClickSound() dari sini sesuai request
