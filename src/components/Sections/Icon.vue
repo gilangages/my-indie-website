@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { Howl } from "howler";
 
 // --- 1. IMPORT ASSETS ---
 import iconMusicOff from "../../assets/svg/music-off.svg?url";
@@ -12,19 +13,23 @@ import bgmFile from "../../assets/audio/bgm-main.mp3";
 import clickSfxFile from "../../assets/audio/click-main.mp3"; // Import efek suara klik
 
 // --- SETUP SOUND EFFECT (SFX) ---
-const clickAudio = new Audio(clickSfxFile);
-clickAudio.volume = 0.1; // Atur volume suara klik
+const clickAudio = new Howl({
+  src: [clickSfxFile],
+  volume: 0.1
+});
 
 const playClickSound = () => {
-  clickAudio.currentTime = 0;
-  clickAudio.play().catch((e) => console.error("SFX Error:", e));
+  clickAudio.stop(); // Mirip dengan currentTime = 0 (stop dan play ulang)
+  clickAudio.play();
 };
 
 // --- 2. LOGIC MUSIC ---
 const isPlaying = ref(false);
-const audio = new Audio(bgmFile);
-audio.loop = true;
-audio.volume = 1;
+const audio = new Howl({
+  src: [bgmFile],
+  loop: true,
+  volume: 1.0
+});
 
 const toggleMusic = () => {
   // HAPUS playClickSound() dari sini sesuai request
@@ -32,8 +37,8 @@ const toggleMusic = () => {
     audio.pause();
     isPlaying.value = false;
   } else {
-    audio.currentTime = 0;
-    audio.play().catch((e) => console.error(e));
+    audio.seek(0); // Mulai dari awal (mirip dengan currentTime = 0)
+    audio.play();
     isPlaying.value = true;
   }
 };
