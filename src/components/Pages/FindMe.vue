@@ -20,23 +20,23 @@ const socials = [
     id: 1,
     name: "YouTube",
     icon: iconYt,
-    link: "https://www.youtube.com/@abdiannn",
+    link: "https://www.youtube.com/@gilangabdian",
     desc: "I’m mostly active on YouTube, where I draw digitally, build websites, and do whatever I enjoy.",
   },
   {
     id: 2,
     name: "Instagram",
     icon: iconIg,
-    link: "https://www.instagram.com/abdian.sketch",
+    link: "https://www.instagram.com/qeynotfound",
     desc: "I share my traditional art here. If you’re curious about my drawings, feel free to check them out.",
   },
-  {
-    id: 3,
-    name: "TikTok",
-    icon: iconTiktok,
-    link: "https://www.tiktok.com/@abdian.sketch",
-    desc: "I’m not very active on TikTok, but I still use it to share my traditional art.",
-  },
+  // {
+  //   id: 3,
+  //   name: "TikTok",
+  //   icon: iconTiktok,
+  //   link: "https://www.tiktok.com/@abdian.sketch",
+  //   desc: "I’m not very active on TikTok, but I still use it to share my traditional art.",
+  // },
 ];
 </script>
 

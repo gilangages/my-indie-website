@@ -3,6 +3,8 @@ import { ref, onMounted, onUnmounted } from "vue";
 
 // --- 1. IMPORT GAMBAR ---
 import imgJayjo from "../../assets/traditional-art/jayjo.jpeg";
+import haise from "../../assets/traditional-art/one.jpeg";
+import yuta from "../../assets/traditional-art/two.jpeg";
 import imgTotoro from "../../assets/digital-art/totoro.png";
 import imgRead from "../../assets/digital-art/read.png";
 
@@ -24,11 +26,8 @@ const selectedImage = ref(null);
 // --- 2. DATA ARTWORKS ---
 const traditionalArtworks = [
   { id: 1, src: imgJayjo, caption: "Sketch karakter Jayjo dari Webtoon Windbreaker" },
-  { id: 2, src: imgJayjo, caption: "Latihan shading menggunakan pensil 2B" },
-  { id: 3, src: imgJayjo, caption: "Coba menggambar anatomi wajah" },
-  { id: 4, src: imgJayjo, caption: "Artstyle challenge (Traditional)" },
-  { id: 5, src: imgJayjo, caption: "Fanart karakter random" },
-  { id: 6, src: imgJayjo, caption: "Drawing pen practice" },
+  { id: 2, src: haise, caption: "Ken Kaneki and Touka from manga Tokyo Ghoul" },
+  { id: 2, src: yuta, caption: "Yuta Okkotsu from manga Jujutsu Kaisen" },
 ];
 
 const digitalArtworks = [
@@ -38,9 +37,8 @@ const digitalArtworks = [
 ];
 
 const animationVideos = [
-  { id: 1, src: "https://www.youtube.com/embed/ivdqOTAxlJo?controls=0&rel=0" },
-  { id: 2, src: "https://www.youtube.com/embed/0ATh_Vc2SAQ?start=31&controls=0&rel=0" },
-  { id: 3, src: "https://www.youtube.com/embed/0ATh_Vc2SAQ?start=31&controls=0&rel=0" },
+  { id: 1, src: "https://www.youtube.com/embed/65HEf_FWD3o?si=HJ04wEZNplyLTf7g" },
+  { id: 2, src: "https://www.youtube.com/embed/ZFXFDptmrv8?si=SGCYNBKrjQWVxtJi" },
 ];
 
 // --- 3. LOGIKA POPUP & AUDIO ---
@@ -154,7 +152,7 @@ onUnmounted(() => {
                   See More on
                   <a
                     target="_blank"
-                    href="https://www.instagram.com/abdian.sketch"
+                    href="https://www.instagram.com/qeynotfound"
                     class="text-accent hover:opacity-80 font-bold underline">
                     Instagram
                   </a>
@@ -180,7 +178,7 @@ onUnmounted(() => {
                   See More on
                   <a
                     target="_blank"
-                    href="https://www.youtube.com/@abdiannn"
+                    href="https://www.youtube.com/@gilangabdian"
                     class="text-accent hover:opacity-80 font-bold underline">
                     Youtube
                   </a>
@@ -210,7 +208,7 @@ onUnmounted(() => {
                   See More on
                   <a
                     target="_blank"
-                    href="https://www.youtube.com/@abdiannn"
+                    href="https://www.youtube.com/@gilangabdian"
                     class="text-accent hover:opacity-80 font-bold underline">
                     Youtube
                   </a>
@@ -259,7 +257,9 @@ onUnmounted(() => {
 }
 .scale-enter-active,
 .scale-leave-active {
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
 }
 .scale-enter-from,
 .scale-leave-to {
