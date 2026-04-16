@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { Howl } from "howler";
 
 // --- 1. IMPORT ASSETS ---
 import iconMusicOff from "../../assets/svg/music-off.svg?url";
@@ -13,25 +12,38 @@ import bgmFile from "../../assets/audio/bgm-main.mp3";
 import clickSfxFile from "../../assets/audio/click-main.mp3"; // Import efek suara klik
 
 // --- SETUP SOUND EFFECT (SFX) ---
-const clickAudio = new Howl({
-  src: [clickSfxFile],
-  volume: 0.1
-});
+let howlerModule = null;
+let clickAudio = null;
 
-const playClickSound = () => {
+const playClickSound = async () => {
+  if (!howlerModule) {
+    howlerModule = await import("howler");
+  }
+  if (!clickAudio) {
+    clickAudio = new howlerModule.Howl({
+      src: [clickSfxFile],
+      volume: 0.1
+    });
+  }
   clickAudio.stop(); // Mirip dengan currentTime = 0 (stop dan play ulang)
   clickAudio.play();
 };
 
 // --- 2. LOGIC MUSIC ---
 const isPlaying = ref(false);
-const audio = new Howl({
-  src: [bgmFile],
-  loop: true,
-  volume: 1.0
-});
+let audio = null;
 
-const toggleMusic = () => {
+const toggleMusic = async () => {
+  if (!howlerModule) {
+    howlerModule = await import("howler");
+  }
+  if (!audio) {
+    audio = new howlerModule.Howl({
+      src: [bgmFile],
+      loop: true,
+      volume: 1.0
+    });
+  }
   // HAPUS playClickSound() dari sini sesuai request
   if (isPlaying.value) {
     audio.pause();
@@ -78,16 +90,12 @@ const toggleTheme = () => {
 <template>
   <div class="flex ml-12 max-sm:ml-4 min-md:mb-4 mt-8 gap-4">
     <span class="icon" @click="toggleTheme">
-      <img
-        :src="isDark ? iconThemeNight : iconThemeLight"
-        alt="Theme Toggle"
+      <img :src="isDark ? iconThemeNight : iconThemeLight" alt="Theme Toggle"
         class="w-9 transition-transform duration-200 hover:scale-115 cursor-pointer" />
     </span>
 
     <span class="icon" @click="toggleMusic">
-      <img
-        :src="isPlaying ? iconMusicOn : iconMusicOff"
-        alt="Music Toggle"
+      <img :src="isPlaying ? iconMusicOn : iconMusicOff" alt="Music Toggle"
         class="w-10 transition-transform duration-200 hover:scale-115 cursor-pointer" />
     </span>
   </div>

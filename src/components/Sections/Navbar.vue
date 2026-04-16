@@ -6,12 +6,16 @@ import ContactModal from "../Modal/ContactModal.vue";
 import clickSfxFile from "../../assets/audio/click-main.mp3"; // <-- (1) Import Audio
 
 // 2. Setup Audio
-const clickAudio = new Audio(clickSfxFile);
-clickAudio.volume = 0.1;
+let howlerModule = null;
+let clickAudio = null;
 
-const playClickSound = () => {
-  clickAudio.currentTime = 0;
-  clickAudio.play().catch((e) => console.error(e));
+const playClickSound = async () => {
+  if (!howlerModule) howlerModule = await import("howler");
+  if (!clickAudio) {
+    clickAudio = new howlerModule.Howl({ src: [clickSfxFile], volume: 0.1 });
+  }
+  clickAudio.stop();
+  clickAudio.play();
 };
 
 // 3. State untuk Modal Contact

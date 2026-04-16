@@ -49,12 +49,18 @@ const generateSakura = () => {
   sakuraPetals.value = temp;
 };
 
+let howlerModule = null;
+let audioInstance = null;
+
 // Fungsi Toggle Animasi + Suara
-const toggleAnimation = () => {
+const toggleAnimation = async () => {
   // 1. Mainkan Suara
-  const audio = new Audio(clickSfx);
-  audio.volume = 0.5; // Volume 50% agar tidak terlalu keras
-  audio.play().catch((err) => console.log("Audio play error:", err));
+  if (!howlerModule) howlerModule = await import("howler");
+  if (!audioInstance) {
+    audioInstance = new howlerModule.Howl({ src: [clickSfx], volume: 0.5 });
+  }
+  audioInstance.stop();
+  audioInstance.play();
 
   // 2. Ubah State Animasi
   showAnimation.value = !showAnimation.value;

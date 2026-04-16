@@ -1,17 +1,20 @@
 <script setup>
 // 1. IMPORT ASSETS GAMBAR
-import iconYt from "../../assets/svg/youtube.svg?url";
 import iconIg from "../../assets/svg/instagram.svg?url";
-import iconTiktok from "../../assets/svg/tiktok.svg?url";
+import { Icon } from "@iconify/vue";
 import clickSfxFile from "../../assets/audio/click-main.mp3"; // <-- (1) Import Audio
 
 // 2. SETUP AUDIO
-const clickAudio = new Audio(clickSfxFile);
-clickAudio.volume = 0.1; // <-- (2) Volume 0.1
+let howlerModule = null;
+let clickAudio = null;
 
-const playClickSound = () => {
-  clickAudio.currentTime = 0;
-  clickAudio.play().catch((e) => console.error(e));
+const playClickSound = async () => {
+  if (!howlerModule) howlerModule = await import("howler");
+  if (!clickAudio) {
+    clickAudio = new howlerModule.Howl({ src: [clickSfxFile], volume: 0.1 });
+  }
+  clickAudio.stop();
+  clickAudio.play();
 };
 
 // 3. DATA SOCIAL MEDIA
@@ -24,19 +27,19 @@ const socials = [
   //   desc: "I’m mostly active on YouTube, where I draw digitally, build websites, and do whatever I enjoy.",
   // },
   {
-    id: 2,
+    id: 1,
     name: "Instagram",
-    icon: iconIg,
+    icon: "simple-icons:instagram",
     link: "https://www.instagram.com/qeynotfound",
     desc: "I share my traditional art here. If you’re curious about my drawings, feel free to check them out.",
   },
-  // {
-  //   id: 3,
-  //   name: "TikTok",
-  //   icon: iconTiktok,
-  //   link: "https://www.tiktok.com/@abdian.sketch",
-  //   desc: "I’m not very active on TikTok, but I still use it to share my traditional art.",
-  // },
+  {
+    id: 2,
+    name: "Github",
+    icon: "simple-icons:github",
+    link: "https://github.com/gilangages",
+    desc: "Just a place where I store my projects.",
+  },
 ];
 </script>
 
@@ -46,7 +49,7 @@ const socials = [
       class="border border-[#a95964] rounded-[10px] px-2 pt-2 transition-transform duration-200 hover:scale-101">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2 text-base max-sm:text-sm">
-          <img :src="social.icon" :alt="social.name" class="w-8 max-sm:w-6" />
+          <Icon :icon="social.icon" :alt="social.name" class="text-2xl" />
           <span>{{ social.name }}</span>
         </div>
 

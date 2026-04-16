@@ -6,12 +6,16 @@ import GameModal from "../Modal/GameModal.vue";
 import clickSfxFile from "../../assets/audio/click-main.mp3"; // <-- (1) Import Audio
 
 // --- SETUP AUDIO ---
-const clickAudio = new Audio(clickSfxFile);
-clickAudio.volume = 0.1; // <-- (2) Volume sesuai request (0.1)
+let howlerModule = null;
+let clickAudio = null;
 
-const playClickSound = () => {
-  clickAudio.currentTime = 0;
-  clickAudio.play().catch((e) => console.error(e));
+const playClickSound = async () => {
+  if (!howlerModule) howlerModule = await import("howler");
+  if (!clickAudio) {
+    clickAudio = new howlerModule.Howl({ src: [clickSfxFile], volume: 0.1 });
+  }
+  clickAudio.stop();
+  clickAudio.play();
 };
 
 // --- STATE MODAL ---
