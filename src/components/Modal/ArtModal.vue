@@ -7,6 +7,7 @@ import haise from "../../assets/traditional-art/one.jpeg";
 import yuta from "../../assets/traditional-art/two.jpeg";
 import imgTotoro from "../../assets/digital-art/totoro.png";
 import imgRead from "../../assets/digital-art/read.png";
+import imgHehe from "../../assets/digital-art/hehe.png";
 
 // --- IMPORT AUDIO ---
 import clickSupportSrc from "../../assets/audio/click-support.mp3"; // Untuk hover Ibix
@@ -25,36 +26,43 @@ const selectedImage = ref(null);
 
 // --- 2. DATA ARTWORKS ---
 const traditionalArtworks = [
-  { id: 1, src: imgJayjo, caption: "Sketch karakter Jayjo dari Webtoon Windbreaker" },
+  { id: 1, src: imgJayjo, caption: "Jayjo from Webtoon Windbreaker" },
   { id: 2, src: haise, caption: "Ken Kaneki and Touka from manga Tokyo Ghoul" },
   { id: 2, src: yuta, caption: "Yuta Okkotsu from manga Jujutsu Kaisen" },
 ];
 
 const digitalArtworks = [
-  { id: 1, src: imgTotoro, caption: "Fanart Totoro yang gemoy (Ghibli Studio)" },
-  { id: 2, src: imgRead, caption: "Original Character: Gadis yang suka membaca" },
-  { id: 3, src: imgRead, caption: "Eksperimen pewarnaan style watercolor" },
+  { id: 1, src: imgTotoro, caption: "Fanart Totoro (Ghibli Studio), reference from pinterest" },
+  { id: 2, src: imgRead, caption: "My first draw in ibis paint x" },
+  { id: 3, src: imgHehe, caption: "Girl and Boy, reference from pinterest" },
 ];
 
 const animationVideos = [
-  { id: 1, src: "https://www.youtube.com/embed/65HEf_FWD3o?si=HJ04wEZNplyLTf7g" },
-  { id: 2, src: "https://www.youtube.com/embed/ZFXFDptmrv8?si=SGCYNBKrjQWVxtJi" },
+  { id: 1, src: "https://www.youtube.com/embed/YgLzyukIxjs?si=hnX-5HtpK6aX_t5x" },
+  { id: 2, src: "https://www.youtube.com/embed/C8tw3iHPsc4?si=XyryWRQnyryIl0u0" },
 ];
 
 // --- 3. LOGIKA POPUP & AUDIO ---
+let howlerModule = null;
+let hoverAudio = null;
+let clickAudio = null;
+let popMainAudio = null;
+let popSupportAudio = null;
 
 // Fungsi suara HOVER (Ibix Paint X)
-const playHoverSound = () => {
-  const audio = new Audio(clickSupportSrc);
-  audio.volume = 0.1;
-  audio.play().catch((err) => console.error("Audio hover error:", err));
+const playHoverSound = async () => {
+  if (!howlerModule) howlerModule = await import("howler");
+  if (!hoverAudio) hoverAudio = new howlerModule.Howl({ src: [clickSupportSrc], volume: 0.1 });
+  hoverAudio.stop();
+  hoverAudio.play();
 };
 
 // Fungsi suara KLIK (Tombol Close Modal Utama)
-const playClickSound = () => {
-  const audio = new Audio(clickMainSrc);
-  audio.volume = 0.1;
-  audio.play().catch((err) => console.error("Audio click error:", err));
+const playClickSound = async () => {
+  if (!howlerModule) howlerModule = await import("howler");
+  if (!clickAudio) clickAudio = new howlerModule.Howl({ src: [clickMainSrc], volume: 0.1 });
+  clickAudio.stop();
+  clickAudio.play();
 };
 
 // Wrapper untuk tombol close modal utama
@@ -66,20 +74,22 @@ const handleClose = () => {
 // --- LOGIKA BUKA/TUTUP GAMBAR PREVIEW ---
 
 // 1. Buka Gambar (Bunyi pop-main.mp3)
-const openImage = (src, caption) => {
-  const audio = new Audio(popMainSrc);
-  audio.volume = 0.1;
-  audio.play().catch((err) => console.error("Audio open image error:", err));
+const openImage = async (src, caption) => {
+  if (!howlerModule) howlerModule = await import("howler");
+  if (!popMainAudio) popMainAudio = new howlerModule.Howl({ src: [popMainSrc], volume: 0.1 });
+  popMainAudio.stop();
+  popMainAudio.play();
 
   selectedImage.value = { src, caption };
 };
 
 // 2. Tutup Gambar (Bunyi pop-support.mp3)
-const closeImage = () => {
+const closeImage = async () => {
   if (selectedImage.value) {
-    const audio = new Audio(popSupportSrc);
-    audio.volume = 0.1;
-    audio.play().catch((err) => console.error("Audio close image error:", err));
+    if (!howlerModule) howlerModule = await import("howler");
+    if (!popSupportAudio) popSupportAudio = new howlerModule.Howl({ src: [popSupportSrc], volume: 0.1 });
+    popSupportAudio.stop();
+    popSupportAudio.play();
 
     selectedImage.value = null;
   }
@@ -115,9 +125,10 @@ onUnmounted(() => {
                 : 'font-display absolute inset-0 m-auto w-[90%] max-w-[960px] max-h-[85vh] rounded-[20px] bg-bg-modal text-text-modal  overflow-hidden flex flex-col pointer-events-auto shadow-2xl border-2 border-black/10 transition-colors duration-300'
             ">
             <div
-              class="sticky top-0 z-10 flex justify-end p-3 border-b border-black/20 bg-bg-modal text-text-modal transition-colors duration-300">
+              class="sticky top-0 z-10 flex justify-between items-center p-3 border-b border-black/20 bg-bg-modal text-accent transition-colors duration-300">
+              <p>art</p>
               <button
-                class="cursor-pointer text-2xl transition-transform duration-200 hover:scale-110"
+                class="cursor-pointer text-2xl transition-transform duration-200 hover:scale-110 pr-3"
                 @click="handleClose">
                 {{ isMobile ? "∨" : "[x]" }}
               </button>
@@ -178,7 +189,7 @@ onUnmounted(() => {
                   See More on
                   <a
                     target="_blank"
-                    href="https://www.youtube.com/@gilangabdian"
+                    href="https://www.youtube.com/@jeezfay"
                     class="text-accent hover:opacity-80 font-bold underline">
                     Youtube
                   </a>
@@ -208,7 +219,7 @@ onUnmounted(() => {
                   See More on
                   <a
                     target="_blank"
-                    href="https://www.youtube.com/@gilangabdian"
+                    href="https://www.youtube.com/@jeezfay"
                     class="text-accent hover:opacity-80 font-bold underline">
                     Youtube
                   </a>
@@ -251,36 +262,45 @@ onUnmounted(() => {
 .fade-leave-active {
   transition: opacity 0.2s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
+
 .scale-enter-active,
 .scale-leave-active {
   transition:
     transform 0.25s ease,
     opacity 0.25s ease;
 }
+
 .scale-enter-from,
 .scale-leave-to {
   transform: scale(0.95);
   opacity: 0;
 }
+
 .sheet-enter-active {
   transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
+
 .sheet-leave-active {
   transition: transform 0.4s cubic-bezier(0.4, 0, 1, 1);
 }
+
 .sheet-enter-from {
   transform: translateY(100%);
 }
+
 .sheet-enter-to {
   transform: translateY(0);
 }
+
 .sheet-leave-from {
   transform: translateY(0);
 }
+
 .sheet-leave-to {
   transform: translateY(100%);
 }
@@ -288,14 +308,17 @@ onUnmounted(() => {
 .custom-scroll::-webkit-scrollbar {
   width: 8px;
 }
+
 .custom-scroll::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
+
 .custom-scroll::-webkit-scrollbar-thumb {
   background-color: var(--color-accent);
   border-radius: 10px;
 }
+
 .custom-scroll {
   scrollbar-width: thin;
   scrollbar-color: var(--color-accent) transparent;

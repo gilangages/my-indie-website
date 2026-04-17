@@ -55,16 +55,22 @@ const projects = [
 ];
 
 // --- AUDIO LOGIC ---
-const playHoverSound = () => {
-  const audio = new Audio(clickSupportMp3);
-  audio.volume = 0.1;
-  audio.play();
+let howlerModule = null;
+let hoverAudio = null;
+let clickAudio = null;
+
+const playHoverSound = async () => {
+  if (!howlerModule) howlerModule = await import("howler");
+  if (!hoverAudio) hoverAudio = new howlerModule.Howl({ src: [clickSupportMp3], volume: 0.1 });
+  hoverAudio.stop();
+  hoverAudio.play();
 };
 
-const handleClose = () => {
-  const audio = new Audio(clickMainMp3);
-  audio.volume = 0.1;
-  audio.play();
+const handleClose = async () => {
+  if (!howlerModule) howlerModule = await import("howler");
+  if (!clickAudio) clickAudio = new howlerModule.Howl({ src: [clickMainMp3], volume: 0.1 });
+  clickAudio.stop();
+  clickAudio.play();
   emit("close");
 };
 
@@ -81,22 +87,17 @@ onUnmounted(() => {
 <template>
   <Teleport to="body">
     <transition name="fade">
-      <div
-        v-show="open"
-        class="fixed inset-0 z-50 flex justify-center pointer-events-none"
+      <div v-show="open" class="fixed inset-0 z-50 flex justify-center pointer-events-none"
         :class="isMobile ? 'items-end' : 'items-center'">
         <transition :name="isMobile ? 'sheet' : 'scale'">
-          <div
-            v-show="open"
-            :class="
-              isMobile
-                ? 'fixed bottom-0 left-0 right-0 max-h-[90vh] min-h-[60vh] rounded-t-[20px] bg-bg-modal text-text-modal overflow-hidden flex flex-col pointer-events-auto shadow-[0_-5px_30px_rgba(0,0,0,0.3)] transition-colors duration-300'
-                : 'absolute inset-0 m-auto w-[90%] max-w-[960px] max-h-[85vh] rounded-[20px] bg-bg-modal text-text-modal overflow-hidden flex flex-col pointer-events-auto shadow-2xl border-2 border-black/10 transition-colors duration-300'
+          <div v-show="open" :class="isMobile
+              ? 'fixed bottom-0 left-0 right-0 max-h-[90vh] min-h-[60vh] rounded-t-[20px] bg-bg-modal text-text-modal overflow-hidden flex flex-col pointer-events-auto shadow-[0_-5px_30px_rgba(0,0,0,0.3)] transition-colors duration-300'
+              : 'absolute inset-0 m-auto w-[90%] max-w-[960px] max-h-[85vh] rounded-[20px] bg-bg-modal text-text-modal overflow-hidden flex flex-col pointer-events-auto shadow-2xl border-2 border-black/10 transition-colors duration-300'
             ">
             <div
-              class="sticky top-0 z-10 flex justify-end p-3 text-text-modal border-b border-black/20 bg-bg-modal transition-colors duration-300">
-              <button
-                class="cursor-pointer text-2xl transition-transform duration-200 hover:scale-110"
+              class="sticky top-0 z-10 flex justify-between items-center p-3 text-accent border-b border-black/20 bg-bg-modal transition-colors duration-300">
+              <p>web</p>
+              <button class="cursor-pointer text-2xl transition-transform duration-200 hover:scale-110 pr-3"
                 @click="handleClose">
                 {{ isMobile ? "∨" : "[x]" }}
               </button>
@@ -107,10 +108,7 @@ onUnmounted(() => {
                 <div class="flex flex-col gap-2">
                   <h1 class="text-xl font-bold">Tools</h1>
                   <div class="flex flex-wrap gap-2">
-                    <div
-                      v-for="tool in tools"
-                      :key="tool"
-                      @mouseenter="playHoverSound"
+                    <div v-for="tool in tools" :key="tool" @mouseenter="playHoverSound"
                       class="border-2 px-3 py-2 rounded shadow-[1px_3px_1px_#2c1a20] transition-transform duration-200 hover:scale-95 cursor-default">
                       {{ tool }}
                     </div>
@@ -120,10 +118,7 @@ onUnmounted(() => {
                 <div class="flex flex-col gap-2">
                   <h1 class="text-xl font-bold">Development</h1>
                   <div class="flex flex-wrap gap-2">
-                    <div
-                      v-for="stack in devStacks"
-                      :key="stack"
-                      @mouseenter="playHoverSound"
+                    <div v-for="stack in devStacks" :key="stack" @mouseenter="playHoverSound"
                       class="border-2 px-3 py-2 rounded shadow-[1px_3px_1px_#2c1a20] transition-transform duration-200 hover:scale-95 cursor-default">
                       {{ stack }}
                     </div>
@@ -139,9 +134,7 @@ onUnmounted(() => {
                 <div v-for="(project, index) in projects" :key="index">
                   <div class="flex flex-col gap-4 items-center sm:flex-row sm:items-start sm:gap-6 py-6">
                     <div class="shrink-0">
-                      <img
-                        :src="project.img"
-                        :alt="project.title"
+                      <img :src="project.img" :alt="project.title"
                         class="w-[300px] aspect-[4/3] object-cover rounded-xl transition-transform duration-200 hover:scale-105 border border-black/10" />
                     </div>
 
@@ -153,10 +146,7 @@ onUnmounted(() => {
                         {{ project.desc }}
                       </p>
                       <div class="mt-auto pt-2 sm:text-left">
-                        <a
-                          :href="project.link"
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <a :href="project.link" target="_blank" rel="noopener noreferrer"
                           class="inline-block px-12 py-3 rounded-lg bg-accent text-white font-semibold no-underline transition-opacity hover:opacity-80">
                           see
                         </a>
@@ -184,9 +174,7 @@ onUnmounted(() => {
               <div class="mt-8 sm:text-left">
                 <p>
                   See More on
-                  <a
-                    target="_blank"
-                    href="https://github.com/gilangages"
+                  <a target="_blank" href="https://github.com/gilangages"
                     class="text-accent hover:opacity-80 font-bold underline">
                     Github
                   </a>
@@ -206,6 +194,7 @@ onUnmounted(() => {
 .fade-leave-active {
   transition: opacity 0.2s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
@@ -216,6 +205,7 @@ onUnmounted(() => {
 .scale-leave-active {
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
+
 .scale-enter-from,
 .scale-leave-to {
   transform: scale(0.95);
@@ -226,18 +216,23 @@ onUnmounted(() => {
 .sheet-enter-active {
   transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
+
 .sheet-leave-active {
   transition: transform 0.4s cubic-bezier(0.4, 0, 1, 1);
 }
+
 .sheet-enter-from {
   transform: translateY(100%);
 }
+
 .sheet-enter-to {
   transform: translateY(0);
 }
+
 .sheet-leave-from {
   transform: translateY(0);
 }
+
 .sheet-leave-to {
   transform: translateY(100%);
 }
@@ -246,14 +241,17 @@ onUnmounted(() => {
 .custom-scroll::-webkit-scrollbar {
   width: 8px;
 }
+
 .custom-scroll::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
+
 .custom-scroll::-webkit-scrollbar-thumb {
   background-color: var(--color-accent);
   border-radius: 10px;
 }
+
 .custom-scroll {
   scrollbar-width: thin;
   scrollbar-color: var(--color-accent) transparent;
