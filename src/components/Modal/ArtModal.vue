@@ -37,11 +37,6 @@ const digitalArtworks = [
   { id: 3, src: imgHehe, caption: "Girl and Boy, reference from pinterest" },
 ];
 
-const animationVideos = [
-  { id: 1, src: "https://www.youtube.com/embed/YgLzyukIxjs?si=hnX-5HtpK6aX_t5x" },
-  { id: 2, src: "https://www.youtube.com/embed/C8tw3iHPsc4?si=XyryWRQnyryIl0u0" },
-];
-
 // --- 3. LOGIKA POPUP & AUDIO ---
 let howlerModule = null;
 let hoverAudio = null;
@@ -158,18 +153,6 @@ onUnmounted(() => {
                   @click="openImage(art.src, art.caption)" />
               </div>
 
-              <div class="mt-2 sm:text-left">
-                <p>
-                  See More on
-                  <a
-                    target="_blank"
-                    href="https://www.instagram.com/qeynotfound"
-                    class="text-accent hover:opacity-80 font-bold underline">
-                    Instagram
-                  </a>
-                </p>
-              </div>
-
               <hr class="my-8 h-[3px] border-none bg-black/10" />
 
               <h1 class="uppercase text-3xl">Digital Art</h1>
@@ -182,48 +165,6 @@ onUnmounted(() => {
                   :src="art.src"
                   class="aspect-square w-full rounded object-cover transition-transform duration-200 hover:scale-105 cursor-zoom-in border border-black/10"
                   @click="openImage(art.src, art.caption)" />
-              </div>
-
-              <div class="mt-2 sm:text-left">
-                <p>
-                  See More on
-                  <a
-                    target="_blank"
-                    href="https://www.youtube.com/@jeezfay"
-                    class="text-accent hover:opacity-80 font-bold underline">
-                    Youtube
-                  </a>
-                </p>
-              </div>
-
-              <hr class="my-8 h-[3px] border-none bg-black/10" />
-
-              <h1 class="uppercase text-3xl">Animation</h1>
-              <p class="my-2">some of my digital animations</p>
-
-              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div
-                  v-for="video in animationVideos"
-                  :key="video.id"
-                  class="w-full aspect-video rounded-md overflow-hidden bg-black shadow-md border border-black/10">
-                  <iframe
-                    :src="video.src"
-                    class="w-full h-full border-none"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
-                </div>
-              </div>
-
-              <div class="mt-2 max-sm:my-4 sm:text-left">
-                <p>
-                  See More on
-                  <a
-                    target="_blank"
-                    href="https://www.youtube.com/@jeezfay"
-                    class="text-accent hover:opacity-80 font-bold underline">
-                    Youtube
-                  </a>
-                </p>
               </div>
             </div>
           </div>
